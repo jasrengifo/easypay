@@ -8,7 +8,7 @@ include_once('../../init.php');
 
 
 
-if (!isset($_GET['t_key']) || !isset($_GET['id'])) {
+if (!Tools::getIsset(Tools::getValue('t_key')) || !Tools::getIsset(Tools::getValue('id'))) {
     echo "Error: Not enough params";
     exit();
 }
@@ -37,9 +37,8 @@ try {
 
     $isOrderX = Db::getInstance()->getRow(' SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.$_GET['t_key'].'');
 
-
-    $newURL = _PS_BASE_URL_﻿.__PS_BASE_URI__."index.php?controller=order-detail&id_order=".$isOrderX['id_order'];
-    header('Location: '.$newURL);
+    $newURL = _PS_BASE_URL_.__PS_BASE_URI__."index.php?controller=order-detail&id_order=".$isOrderX['id_order'];
+    Tools::redirect($newURL);
 
 } catch (Exception $ex) {
     $xml.= '<ep_status>'      . 'err'                .'</ep_status>' . PHP_EOL;
