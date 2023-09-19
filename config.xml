@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
- <name>easypay</name>
- <displayName>
- <![CDATA[easypay]]>
- </displayName>
- <version>
- <![CDATA[1.2.8]]> 
- </version>
- <description>
- <![CDATA[Módulo para ligar ao Gateway de Pagamentos EasyPay]]> 
- </description>
- <author>
- <![CDATA[trigenius]]>
- </author>
- <tab>
- <![CDATA[payments_gateways]]> 
- </tab>
- <confirmUninstall>
- <![CDATA[Deseja desinstalar o módulo Easypay?]]>
- </confirmUninstall>
- <is_configurable>1</is_configurable>
- <need_instance>0</need_instance>
- <limited_countries></limited_countries>
+    <name>easypay</name>
+    <displayName><![CDATA[EasyPay]]></displayName>
+    <version><![CDATA[1.2.8]]></version>
+    <description><![CDATA[Módulo para ligar ao Gateway de Pagamentos EasyPay]]></description>
+    <author><![CDATA[trigenius]]></author>
+    <tab><![CDATA[payments_gateways]]></tab>
+    <confirmUninstall><![CDATA[Deseja desinstalar o módulo Easypay?]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
 </module>

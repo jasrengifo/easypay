@@ -83,9 +83,9 @@
     				
     				
     				{if $sub.ativado == 1}
-    					<td><button class="btn btn-success" style="margin-bottom: 5px" onClick="capturar_pagamento('{$sub.id_pagamento}', {$sub.valor}, {$sub.cartt}, 'autorizar');">{l s='Capturar Pagamento' mod='easypay'}</button><br><button class="btn btn-danger" onClick="capturar_pagamento('{$sub.id_pagamento}', {$sub.valor}, {$sub.cartt}, 'cancelar');">{l s='Cancelar Pagamento' mod='easypay'}</button></td>
+    					<td><button class="btn btn-success" style="margin-bottom: 5px" onClick="capturar_pagamento('{$sub.id_pagamento|escape:'javascript'}', {$sub.valor|escape:'javascript'}, {$sub.cartt|escape:'javascript'}, 'autorizar');">{l s='Capturar Pagamento' mod='easypay'}</button><br><button class="btn btn-danger" onClick="capturar_pagamento('{$sub.id_pagamento|escape:'javascript'}', {$sub.valor|escape:'javascript'}, {$sub.cartt|escape:'javascript'}, 'cancelar');">{l s='Cancelar Pagamento' mod='easypay'}</button></td>
     				{else}
-    					<td><button class="btn btn-danger" onClick="capturar_pagamento('{$sub.id_pagamento}', {$sub.valor}, {$sub.cartt}, 'cancelar');">{l s='Cancelar Pagamento' mod='easypay'}</button></td>
+    					<td><button class="btn btn-danger" onClick="capturar_pagamento('{$sub.id_pagamento|escape:'javascript'}', {$sub.valor|escape:'javascript'}, {$sub.cartt|escape:'javascript'}, 'cancelar');">{l s='Cancelar Pagamento' mod='easypay'}</button></td>
     				{/if}
 
     			</tr>

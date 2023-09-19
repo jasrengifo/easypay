@@ -71,8 +71,7 @@
     				<td>{$sub.dt_fin|escape:'html':'UTF-8'}</td>
     				<td>{$sub.freq|escape:'html':'UTF-8'}</td>
     				<td>{$sub.n_cob_eftd|escape:'html':'UTF-8'}</td>
-    				{* <td>{Tools::displayPrice(($sub.val_subs*$sub.n_cob_ef)|round:2)}</td> *}
-    				<td>{Tools::displayPrice($sub.val_cobrado|round:2)}</td>
+    				<td>{Tools::displayPrice($sub.val_cobrado|round:2|escape:'number_float')}</td>
     				<td>{$sub.dt_ult_cob|escape:'html':'UTF-8'}</td>
     				<td>{$sub.estado_act|escape:'html':'UTF-8'}</td>
     				<td>{if $sub.estado_act!="INACTIVE"}<a href="{_PS_BASE_URL_}{__PS_BASE_URI__}modules/easypay/cancelSub.php?id_sub={$respuesta->id}"><button class="btn btn-danger">Cancelar Subscição</button></a>{/if}</td>

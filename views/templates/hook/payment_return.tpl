@@ -20,14 +20,14 @@
 <h1>{l s='Obrigado por sua compra!' mod='easypay'}</h1>
 <P>{l s='Para fazer o pagamento deve dirigir-se a um terminal multibanco e usar os seguintes dados' mod='easypay'}:
 </P>
-<p/>{l s='Entidade' mod='easypay'}: {$smarty.get.entity}</p>
-<p>{l s='Referencia' mod='easypay'}: {$smarty.get.reference|number_format:0:" ":" "}</p>
-<p>{l s='Montante' mod='easypay'}: {$smarty.get.monto} €</p>
+<p/>{l s='Entidade' mod='easypay'}: {$smarty.get.entity|escape:'html'}</p>
+<p>{l s='Referencia' mod='easypay'}: {$smarty.get.reference|number_format:0:" ":" "|escape:'number_float'}</p>
+<p>{l s='Montante' mod='easypay'}: {$smarty.get.monto|escape:'number_float'} €</p>
 {/if}
 
 {if isset($smarty.get.method) && $smarty.get.method=='dds'}
 <h1>{l s='Obrigado por sua compra' mod='easypay'}!</h1>
-<P>{l s='Vai ser descontado da a sua conta a quantidade' mod='easypay'} {$smarty.get.monto} € {l s='mensual por' mod='easypay'} {$smarty.get.qtt} {l s='meses comenzando por hoje' mod='easypay'}.
+<P>{l s='Vai ser descontado da a sua conta a quantidade' mod='easypay'} {$smarty.get.monto|escape:'number_float'} € {l s='mensual por' mod='easypay'} {$smarty.get.qtt|escape:'number_int'} {l s='meses comenzando por hoje' mod='easypay'}.
 </P>
 {/if}
 
@@ -38,13 +38,11 @@
 
 <script>
     
-    
     function redirect_url(){
         window.location.replace("{$smarty.get.url}");
     }
     
-   
-        setTimeout(redirect_url,15000)
+    setTimeout(redirect_url,15000)
     
 </script>
 {/if}

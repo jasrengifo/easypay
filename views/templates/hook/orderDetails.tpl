@@ -48,9 +48,9 @@
             <h2>{l s='Dados de pagamento' mod='easypay'}</h2>
             {if $status != 'ok'}{l s='Se ainda não fez o pagamento, por favor dirija-se a um terminal multibanco e utilize os seguintes dados:' mod='easypay'}
                 <ul>
-                    <li><b>{l s='Entidade' mod='easypay'}:</b> {$entidade}</li>
-                    <li><b>{l s='Referencia' mod='easypay'}:</b> {$referencia}</li>
-                    <li><b>{l s='Montante' mod='easypay'}:</b> {Tools::displayPrice($montante)}</li>
+                    <li><b>{l s='Entidade' mod='easypay'}:</b> {$entidade|escape:'html'}</li>
+                    <li><b>{l s='Referencia' mod='easypay'}:</b> {$referencia|escape:'html'}</li>
+                    <li><b>{l s='Montante' mod='easypay'}:</b> {Tools::displayPrice($montante|escape:'html')}</li>
                 </ul>
             
             {else}
@@ -89,9 +89,9 @@
                 </tr>
                 {foreach from=$pagamentos->transactions item=pagamento}
                     <tr>
-                        <td>{$pagamento->document_number}</td>
-                        <td>{$pagamento->date}</td>
-                        <td>{$pagamento->values->paid} {$pagamentos->currency}</td>
+                        <td>{$pagamento->document_number|escape:'html'}</td>
+                        <td>{$pagamento->date|escape:'html'}</td>
+                        <td>{$pagamento->values->paid|escape:'html'} {$pagamentos->currency|escape:'html'}</td>
                     </tr>
                 {/foreach}
             </table>*}
