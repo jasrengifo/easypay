@@ -2,7 +2,7 @@
 /**
  * Easypay
  *
- * Direitos autorais (c) 2023 Trigenius
+ * @copyright Direitos autorais (c) 2023 Trigenius
  * 
  * @author Trigenius
  * 
@@ -18,5 +18,3 @@
  * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
  * NEGOCIAÇÕES NO SOFTWARE.
  */
-
- ?>

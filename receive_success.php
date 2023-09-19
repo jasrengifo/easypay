@@ -1,9 +1,8 @@
 <?php
-
 /**
  * Easypay
  *
- * Direitos autorais (c) 2023 Trigenius
+ * @copyright Direitos autorais (c) 2023 Trigenius
  * 
  * @author Trigenius
  * 
