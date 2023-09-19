@@ -12,8 +12,8 @@ class easypayValidationModuleFrontController extends ModuleFrontController
 
     private function create_pago_simple(){
 
-        if(isset($_POST['nome-mp'])){
-            $nome_mp = $_POST['nome-mp'];
+        if(Tools::getValue('nome-mp')){
+            $nome_mp = Tools::getValue('nome-mp');
         }else{
             $nome_mp = '';
         }
@@ -64,7 +64,7 @@ if($type_ep==1){
 }
         
     $is_frequent = 0;
-    if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+    if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
             $is_frequent = 1;
             $actual = date('Y-m-d H:i');
 

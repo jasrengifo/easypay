@@ -44,7 +44,7 @@ class easypayVisaModuleFrontController extends ModuleFrontController
          //SI EL PRODUCTO NO ES DE SUBSCRIPCIÓN   
             $modo_de_pago = 'single';
 
-            if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+            if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
             
             $modo_de_pago = 'frequent';
 

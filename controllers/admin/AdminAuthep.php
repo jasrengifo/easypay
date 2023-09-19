@@ -30,11 +30,11 @@ class AdminAuthepController extends ModuleAdminController
 	    
 
 
-	    	if(!isset($_POST['pesquisar'])){
+	    	if(!Tools::getIsset(Tools::getValue('pesquisar'))){
 	    		$sql = "SELECT  a.*, b.*, c.*, a.id_cart cartt, ord.id_order id_ord FROM "._DB_PREFIX_."ep_frequent_transactions a INNER JOIN "._DB_PREFIX_."ep_requests b ON b.id_ep_request = a.id_pagamento INNER JOIN "._DB_PREFIX_."orders c ON c.id_cart = b.id_cart INNER JOIN "._DB_PREFIX_."orders ord ON ord.id_cart = a.id_cart WHERE a.autorizado=0 GROUP BY id_trans ORDER BY id_trans DESC";
 	        	$auth = Db::getInstance()->executeS($sql);
 	    	}else{
-	    		$sql = "SELECT a.*, b.*, c.*, a.id_cart cartt, ord.id_order id_ord FROM "._DB_PREFIX_."ep_frequent_transactions a INNER JOIN "._DB_PREFIX_."ep_requests b ON b.id_ep_request = a.id_pagamento INNER JOIN "._DB_PREFIX_."orders c ON c.id_cart = b.id_cart INNER JOIN "._DB_PREFIX_."orders ord ON ord.id_cart = a.id_cart WHERE a.autorizado=0 AND (a.id_user LIKE '%".$_POST['pesquisar']."%' OR c.reference LIKE '%".$_POST['pesquisar']."%' OR a.created LIKE '%".$_POST['pesquisar']."%') GROUP BY id_trans ORDER BY id_trans DESC ";
+	    		$sql = "SELECT a.*, b.*, c.*, a.id_cart cartt, ord.id_order id_ord FROM "._DB_PREFIX_."ep_frequent_transactions a INNER JOIN "._DB_PREFIX_."ep_requests b ON b.id_ep_request = a.id_pagamento INNER JOIN "._DB_PREFIX_."orders c ON c.id_cart = b.id_cart INNER JOIN "._DB_PREFIX_."orders ord ON ord.id_cart = a.id_cart WHERE a.autorizado=0 AND (a.id_user LIKE '%".Tools::getValue('pesquisar')."%' OR c.reference LIKE '%".Tools::getValue('pesquisar')."%' OR a.created LIKE '%".Tools::getValue('pesquisar')."%') GROUP BY id_trans ORDER BY id_trans DESC ";
 
 
 

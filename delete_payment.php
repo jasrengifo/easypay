@@ -3,11 +3,11 @@ include_once('../../config/config.inc.php');
 include_once('../../init.php');
 header('Content-Type: application/json');
 
-if(isset($_POST['payment_id'])){
+if(Tools::getValue('payment_id')){
 
 	Global $cookie;
 	$id_customer = $cookie->id_customer;
-	$payment_id = $_POST['payment_id'];
+	$payment_id = Tools::getValue('payment_id');
 
 
 	//Obtener el registro del pagamento guardado

@@ -12,7 +12,7 @@ if(Configuration::get('EASYPAY_API_IP')!='' AND $_SERVER['REMOTE_ADDR']==Configu
     die('IP não valida');
 }
 
-$respuesta = file_get_contents('php://input');
+$respuesta = Tools::file_get_contents('php://input');
 $respuesta = json_decode($respuesta, true);
 
 

@@ -14,7 +14,7 @@ class easypayDdsModuleFrontController extends ModuleFrontController
 
         
         
-        if(empty($_POST['account_holder']) or empty($_POST['iban']) or empty($_POST['telephone'])){
+        if(empty(Tools::getValue('account_holder')) or empty(Tools::getValue('iban')) or empty(Tools::getValue('telephone'))){
             print('<div style="width: 100%; text-align: center; margin-top: 30px;"><div style="width: 90%; max-width: 900px; display: inline-block; padding: 10px 20px; background-color: rgba(247, 37, 22, .1); border: 1px solid rgb(247, 37, 22); border-radius: 5px;"><b>Erro: Você deve preencher todos os campos.</b></div><br><a style="color: black;" href="/index.php?controller=Order"><div style="padding: 10px 20px; margin-top: 30px; cursor: pointer; display: inline-block; background-color: #e8e8e8; border-radius: 20px;"><b>Corrigir</b></div></div></div>');
                 die();
             
@@ -270,16 +270,16 @@ $body = [
         "email" => $this->context->customer->email,
         "key" => ''.$cart->id.'',
         //"phone_indicative" => "+351",
-        "phone" => $_POST['telephone'],
+        "phone" => Tools::getValue('telephone'),
         //"fiscal_number" =>"PT123456789",
     ],
     "sdd_mandate" => [
     "name" => $address->firstname.' '.$address->lastname,
     "email" => $this->context->customer->email,
-    "account_holder" => $_POST['account_holder'],
+    "account_holder" => Tools::getValue('account_holder'),
     "key" => ''.$cart->id.'',
-    "iban" => $_POST['iban'],
-    "phone" => $_POST['telephone'],
+    "iban" => Tools::getValue('iban'),
+    "phone" => Tools::getValue('telephone'),
     ],
 ];
 
@@ -414,9 +414,9 @@ return $response;
             'dds', // email template file to be use
             'Pagamento de subscrição com Debito Direto - EASYPAY', // email subject
             array(
-                '{titular}' => $_POST['account_holder'],
-                '{iban}' => str_replace($suplant, "X", $_POST['iban']),
-                '{telemovel}' => $_POST['telephone'],
+                '{titular}' => Tools::getValue('account_holder'),
+                '{iban}' => str_replace($suplant, "X", Tools::getValue('iban')),
+                '{telemovel}' => Tools::getValue('telephone'),
                 '{SHOPNAME}' => Configuration::get('PS_SHOP_NAME'),
                 '{EXPTIME}'=> date("d-m-Y H:i:s", strtotime($multibanco['exp_time_trig'])),
             ),
@@ -485,7 +485,7 @@ return $response;
         /**
          * Redirect the customer to the order confirmation page
          */
-        Tools::redirect('index.php?controller=order-confirmation&id_cart='.(int)$cart->id.'&id_module='.(int)$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key.'&qtt='.$_POST['susc'].'&method=dds&monto='.' '.(float) $this->context->cart->getOrderTotal(true, Cart::BOTH).'&url='.urlencode($multibanco['method']['url']));
+        Tools::redirect('index.php?controller=order-confirmation&id_cart='.(int)$cart->id.'&id_module='.(int)$this->module->id.'&id_order='.$this->module->currentOrder.'&key='.$customer->secure_key.'&qtt='.Tools::getValue('susc').'&method=dds&monto='.' '.(float) $this->context->cart->getOrderTotal(true, Cart::BOTH).'&url='.urlencode($multibanco['method']['url']));
     }
 
 

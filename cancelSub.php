@@ -2,7 +2,7 @@
 
 include_once('../../config/config.inc.php');
 include_once('../../init.php');
-$id = $_GET['id_sub']; //este es el id del pagamento, de acuerdo a docs de easypay, DEBES hacer este request despues de la notificacion generica para confirmar
+$id = Tools::getValue('id_sub'); //este es el id del pagamento, de acuerdo a docs de easypay, DEBES hacer este request despues de la notificacion generica para confirmar
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -58,11 +58,10 @@ $history->id_order = (int)$objOrder->id;
 $history->changeIdOrderState(Configuration::get('EASYPAY_SUBSCRICAO_CANCEL'), (int)$objOrder->id);
 $history->add();
 
-echo  $_GET['id_sub'];
+echo  Tools::getValue('id_sub');
 print_r($response);
 
-
-header("Location: ".__PS_BASE_URI__."index.php?controller=order-detail&id_order=".$history->id_order);
+Tools:redirect(__PS_BASE_URI__."index.php?controller=order-detail&id_order=".$history->id_order."");
 die();
 
 

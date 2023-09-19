@@ -28,8 +28,8 @@ class AdminEasyPayController extends ModuleAdminController
 
 	{
 
-			if(isset($_POST['pesquisar'])){
-				$sql = "SELECT * FROM esp_subscrip INNER JOIN "._DB_PREFIX_."orders a ON a.id_order = esp_subscrip.id_order AND (a.reference LIKE '%".$_POST['pesquisar']."%' OR a.id_order = '".$_POST['pesquisar']."' ) ORDER BY id_susc DESC";
+			if(Tools::getValue('pesquisar')){
+				$sql = "SELECT * FROM esp_subscrip INNER JOIN "._DB_PREFIX_."orders a ON a.id_order = esp_subscrip.id_order AND (a.reference LIKE '%".Tools::getValue('pesquisar')."%' OR a.id_order = '".Tools::getValue('pesquisar')."' ) ORDER BY id_susc DESC";
 				
 			}else{
 				$sql = "SELECT * FROM "._DB_PREFIX_."subscrip ORDER BY id_susc DESC";

@@ -999,16 +999,15 @@ public function hookDisplayHeader($params)
 public function hookDisplayOrderDetail($params)
 {
 
-    $sql = "SELECT id_cart FROM "._DB_PREFIX_."orders WHERE id_order = ".$_GET['id_order']." LIMIT 1";
+    $sql = "SELECT id_cart FROM "._DB_PREFIX_."orders WHERE id_order = ".Tools::getValue('id_order')." LIMIT 1";
     $id_cart = Db::getInstance()->executeS($sql);
     
     $sql2 = "SELECT * FROM "._DB_PREFIX_."ep_orders WHERE id_cart=".$id_cart[0]['id_cart'];
     $payment_info = Db::getInstance()->executeS($sql2);
     
     
-    $sql3 = "SELECT * FROM "._DB_PREFIX_."subscrip where id_order=".$_GET['id_order']." ORDER BY id_susc DESC LIMIT 1";
+    $sql3 = "SELECT * FROM "._DB_PREFIX_."subscrip where id_order=".Tools::getValue('id_order')." ORDER BY id_susc DESC LIMIT 1";
     $pagamentos = Db::getInstance()->executeS($sql3);
-    // die(json_encode($payment_info));
 
     if(isset($pagamentos[0])){
         $pagamentos_respuesta = json_decode($pagamentos[0]['respuesta']);

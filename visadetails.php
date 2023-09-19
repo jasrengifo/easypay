@@ -8,7 +8,7 @@ include_once('../../init.php');
 
 
 
-if (!Tools::getIsset(Tools::getValue('t_key')) || !Tools::getIsset(Tools::getValue('id'))) {
+if (!Tools::getValue('t_key') || !Tools::getValue('id')) {
     echo "Error: Not enough params";
     exit();
 }
@@ -19,7 +19,7 @@ if (!Tools::getIsset(Tools::getValue('t_key')) || !Tools::getIsset(Tools::getVal
  * Revisa bien de donde saca el id aca y todo eso, es el AccountId 
  */
 
-if ($api_auth['account_id'] != $_GET['id']) {
+if ($api_auth['account_id'] != Tools::getValue('id')) {
     echo "Error: Data mismatch";
     exit();
 }
@@ -35,7 +35,7 @@ if ($api_auth['account_id'] != $_GET['id']) {
 
 try {
 
-    $isOrderX = Db::getInstance()->getRow(' SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.$_GET['t_key'].'');
+    $isOrderX = Db::getInstance()->getRow(' SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.Tools::getValue('t_key').'');
 
     $newURL = _PS_BASE_URL_.__PS_BASE_URI__."index.php?controller=order-detail&id_order=".$isOrderX['id_order'];
     Tools::redirect($newURL);

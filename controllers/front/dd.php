@@ -17,8 +17,8 @@ class easypayDdModuleFrontController extends ModuleFrontController
         $cat_valido = 1;
         $productos_in = 0;
 
-        if(isset($_POST['nome-mp'])){
-            $nome_mp = $_POST['nome-mp'];
+        if(Tools::getValue('nome-mp')){
+            $nome_mp = Tools::getValue('nome-mp');
         }else{
             $nome_mp = '';
         }
@@ -52,7 +52,7 @@ class easypayDdModuleFrontController extends ModuleFrontController
 
         $modo_de_pago = 'single';
         
-        if(empty($_POST['account_holder']) or empty($_POST['iban']) or empty($_POST['telephone'])){
+        if(empty(Tools::getValue('account_holder')) or empty(Tools::getValue('iban')) or empty(Tools::getValue('telephone'))){
             print('<div style="width: 100%; text-align: center; margin-top: 30px;"><div style="width: 90%; max-width: 900px; display: inline-block; padding: 10px 20px; background-color: rgba(247, 37, 22, .1); border: 1px solid rgb(247, 37, 22); border-radius: 5px;"><b>Error: Você deve preencher todos os campos.</b></div><br><a style="color: black;" href="/index.php?controller=Order"><div style="padding: 10px 20px; margin-top: 30px; cursor: pointer; display: inline-block; background-color: #e8e8e8; border-radius: 20px;"><b>Corrigir</b></div></div></div>');
                 die();
             
@@ -69,7 +69,7 @@ if($type_ep==1){
 }
         
 $is_frequent=0;
-        if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+        if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
             $is_frequent=1;
             
             $actual = date('Y-m-d H:i');
@@ -96,10 +96,10 @@ $is_frequent=0;
                    "sdd_mandate" => [
                     "name" => $address->firstname.' '.$address->lastname,
                     "email" => $this->context->customer->email,
-                    "account_holder" => $_POST['account_holder'],
+                    "account_holder" => Tools::getValue('account_holder'),
                     "key" => ''.$cart->id.'',
-                    "iban" => $_POST['iban'],
-                    "phone" => $_POST['telephone'],
+                    "iban" => Tools::getValue('iban'),
+                    "phone" => Tools::getValue('telephone'),
                     //"max_num_debits" =>"12",
                     ],
             ];
@@ -136,10 +136,10 @@ $is_frequent=0;
                 "sdd_mandate" => [
                 "name" => $address->firstname.' '.$address->lastname,
                 "email" => $this->context->customer->email,
-                "account_holder" => $_POST['account_holder'],
+                "account_holder" => Tools::getValue('account_holder'),
                 "key" => ''.$cart->id.'',
-                "iban" => $_POST['iban'],
-                "phone" => $_POST['telephone'],
+                "iban" => Tools::getValue('iban'),
+                "phone" => Tools::getValue('telephone'),
                 //"max_num_debits" =>"12",
                 ],
             ];
@@ -181,7 +181,7 @@ $response = json_decode($response_body, true);
 
 
 
-if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1 && isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1 && Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
 
     if($response['status']=="ok"){
 
@@ -339,9 +339,9 @@ return $response;
             'dd', // email template file to be use
             'Pagamento com Debito Direto - EASYPAY', // email subject
             array(
-                '{titular}' => $_POST['account_holder'],
-                '{iban}' => str_replace($suplant, "X", $_POST['iban']),
-                '{telemovel}' => $_POST['telephone'],
+                '{titular}' => Tools::getValue('account_holder'),
+                '{iban}' => str_replace($suplant, "X", Tools::getValue('iban')),
+                '{telemovel}' => Tools::getValue('telephone'),
                 '{SHOPNAME}' => Configuration::get('PS_SHOP_NAME'),
             ),
             $this->context->customer->email, // receiver email address 

@@ -7,19 +7,13 @@ ini_set('serialize_precision', 10);
 
 
 
-$id = $_POST['id_pagamento']; //el id del pago a autorizar, esta llamada pide autorizacion, asumo es lo que quieres, docs no tienen explicacion de que es. 
+$id = Tools::getValue('id_pagamento'); //el id del pago a autorizar, esta llamada pide autorizacion, asumo es lo que quieres, docs no tienen explicacion de que es. 
 
 
 
 
-if($_POST['tipo']=='autorizar'){
-        /*
-            $body = [
-                "transaction_key" => "",
-                "descriptive" => "Aprovação manual",
-                "value" => round(floatval($_POST['valor']), 2), //valor
-            ];
-        */
+if(Tools::getValue('tipo')=='autorizar'){
+
         $headers = [
             "AccountId: ".Configuration::get('EASYPAY_API_ID'),
             "ApiKey: ".Configuration::get('EASYPAY_API_KEY'),
@@ -27,37 +21,12 @@ if($_POST['tipo']=='autorizar'){
         ];
 
 
-        /*
-        if(Configuration::get('EASYPAY_TESTES')==1){
-            $URL_EP = "https://api.test.easypay.pt/2.0/frequent/authorisation/" . $id;
-        }else{
-            $URL_EP = "https://api.prod.easypay.pt/2.0/frequent/authorisation/" . $id;
-        }
-                    
-                    
-        $url = $URL_EP;
-
-        $curlOpts = [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => 1,
-            CURLOPT_TIMEOUT => 60,
-            CURLOPT_POSTFIELDS => json_encode($body),
-            CURLOPT_HTTPHEADER => $headers,
-        ];
-
-        $curl = curl_init();
-        curl_setopt_array($curl, $curlOpts);
-        $response_body = curl_exec($curl);
-        curl_close($curl);
-        $response = json_decode($response_body, true);
-        */
         $body = [
 
-                    "transaction_key" => $_POST['id_cart'],
+                    "transaction_key" => Tools::getValue('id_cart'),
                     "descriptive" => "Pagamento EasyPay",
                     "capture_date" => date("Y-m-d"),
-                    "value" => round(floatval($_POST['valor']), 2), 
+                    "value" => round(floatval(Tools::getValue('valor')), 2), 
 
                 ];
 
@@ -68,7 +37,7 @@ if($_POST['tipo']=='autorizar'){
            $URL_EP = "https://api.prod.easypay.pt/2.0/capture/";
         }
 
-        $url = $URL_EP . $_POST['id_pagamento'];
+        $url = $URL_EP . Tools::getValue('id_pagamento');
 
         $curlOpts = [
             CURLOPT_URL => $url,
@@ -86,29 +55,19 @@ if($_POST['tipo']=='autorizar'){
         $response2 = json_decode($response_body, true);
 
 
-        $sql = 'SELECT * FROM '._BD_PREFIX_.'ep_requests WHERE id_cart = '.$_POST['id_cart'].' AND method_type = "mbw"';
+        $sql = 'SELECT * FROM '._BD_PREFIX_.'ep_requests WHERE id_cart = '.Tools::getValue('id_cart').' AND method_type = "mbw"';
         $resultado2 = Db::getInstance()->executeS($sql);
         
-        // if(count($resultado2)>0){
-
-        //     $objOrder = new Order(Order::getOrderByCartId((int)($_POST['id_cart']))); 
-        //     $history = new OrderHistory();
-        //     $history->id_order = (int)$objOrder->id;
-        //     $history->changeIdOrderState(Configuration::get('EASYPAY_BMWAY_WAIT'), (int)$objOrder->id);
-        //     $test = $history->add();
-            
-        // }
         
-
-
-        
-        $sql = "UPDATE "._DB_PREFIX_."ep_frequent_transactions SET autorizado = 1 WHERE id_pagamento='".$_POST['id_pagamento']."' AND id_cart=".$_POST['id_cart'];
+        $sql = "UPDATE "._DB_PREFIX_."ep_frequent_transactions SET autorizado = 1 WHERE id_pagamento='".Tools::getValue('id_pagamento')."' AND id_cart=".Tools::getValue('id_cart');
         Db::getInstance()->execute($sql);
 
-        die(json_encode(array('status'=>'SUCCESS', 'msg'=>'Pagamento autorizado e capturado com sucesso!', 'exta' => $_POST['id_cart'])));
+        die(json_encode(array('status'=>'SUCCESS', 'msg'=>'Pagamento autorizado e capturado com sucesso!', 'exta' => Tools::getValue('id_cart'))));
 
 
-}if($_POST['tipo']='cancelar'){
+}
+
+if(Tools::getValue('tipo')=='cancelar'){
 
     $headers = [
             "AccountId: ".Configuration::get('EASYPAY_API_ID'),
@@ -118,9 +77,9 @@ if($_POST['tipo']=='autorizar'){
 
 
     if(Configuration::get('EASYPAY_TESTES')==1){
-            $URL_EP = "https://api.test.easypay.pt/2.0/void/" . $_POST['id_pagamento'];
+            $URL_EP = "https://api.test.easypay.pt/2.0/void/" . Tools::getValue('id_pagamento');
         }else{
-           $URL_EP = "https://api.prod.easypay.pt/2.0/void/" . $_POST['id_pagamento'];
+           $URL_EP = "https://api.prod.easypay.pt/2.0/void/" . Tools::getValue('id_pagamento');
         }
 
 
@@ -128,7 +87,7 @@ if($_POST['tipo']=='autorizar'){
 
     $body = [
 
-                    "transaction_key" => $_POST['id_cart'],
+                    "transaction_key" => Tools::getValue('id_cart'),
                     "descriptive" => "Cancelar pagamento manualmente",
 
                 ];
@@ -144,7 +103,7 @@ if($_POST['tipo']=='autorizar'){
     ];
 
 
-    $objOrder = new Order(Order::getOrderByCartId((int)($_POST['id_cart']))); 
+    $objOrder = new Order(Order::getOrderByCartId((int)(Tools::getValue('id_cart')))); 
     $history = new OrderHistory();
     $history->id_order = (int)$objOrder->id;
     $history->changeIdOrderState(Configuration::get('EASYPAY_PAYMENT_CANCEL'), (int)$objOrder->id);
@@ -156,7 +115,7 @@ if($_POST['tipo']=='autorizar'){
     curl_close($curl);
     $response = json_decode($response_body, true);
 
-    $sql = "UPDATE "._DB_PREFIX_."ep_frequent_transactions SET autorizado = 2 WHERE id_pagamento='".$_POST['id_pagamento']."'";
+    $sql = "UPDATE "._DB_PREFIX_."ep_frequent_transactions SET autorizado = 2 WHERE id_pagamento='".Tools::getValue('id_pagamento')."'";
     Db::getInstance()->execute($sql);
 
 

@@ -66,9 +66,9 @@ class easypayFrequentmbwayModuleFrontController extends ModuleFrontController
 
 if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1){
     if(Configuration::get('EASYPAY_TESTES')==1){
-        $URL_EP = "https://api.test.easypay.pt/2.0/capture/".$_POST['id_payment'];
+        $URL_EP = "https://api.test.easypay.pt/2.0/capture/".Tools::getValue('id_payment');
     }else{
-        $URL_EP = "https://api.prod.easypay.pt/2.0/capture/".$_POST['id_payment'];
+        $URL_EP = "https://api.prod.easypay.pt/2.0/capture/".Tools::getValue('id_payment');
     }
 
 
@@ -118,12 +118,12 @@ if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1){
     $sql = "INSERT INTO "._DB_PREFIX_."ep_requests (status, id_ep_request, method_type, method_status, method_entity, method_reference, customer_easypay, id_cart, first_date, updated, modo_de_pago, nombre_de_pago, id_user) VALUES ('".$response['status']."', '".$response['id']."', '".$tipo_metodo_tipo."', '".$tipo_metodo_status."', '', '', '".$response_customer_id."', ".$cart_number->cart->id.", NOW(), NOW(), '".$modo_de_pago."', '', ".$this->context->customer->id.")";
 }else{
     
-    $sql = "INSERT INTO "._DB_PREFIX_."ep_requests (status, id_ep_request, method_type, method_status, method_entity, method_reference, customer_easypay, id_cart, first_date, updated, modo_de_pago, nombre_de_pago, id_user) VALUES ('ok', '".$_POST['id_payment']."', 'mbw', 'pending', '', '', '".$this->context->customer->id."', ".$cart_number->cart->id.", NOW(), NOW(), '".$modo_de_pago."', '".$nome_mp."', ".$this->context->customer->id.")";
+    $sql = "INSERT INTO "._DB_PREFIX_."ep_requests (status, id_ep_request, method_type, method_status, method_entity, method_reference, customer_easypay, id_cart, first_date, updated, modo_de_pago, nombre_de_pago, id_user) VALUES ('ok', '".Tools::getValue('id_payment')."', 'mbw', 'pending', '', '', '".$this->context->customer->id."', ".$cart_number->cart->id.", NOW(), NOW(), '".$modo_de_pago."', '".$nome_mp."', ".$this->context->customer->id.")";
                 // die($sql);
     Db::getInstance()->execute($sql);
 
 
-    $new_trans = "INSERT INTO "._DB_PREFIX_."ep_frequent_transactions (id_user, id_pagamento, tipo_pagamento, autorizado, valor, ativado, id_cart) VALUES ('".$this->context->customer->id."', '".$_POST['id_payment']."', 'frequent_mbw', 0, ".round((float) $this->context->cart->getOrderTotal(true, Cart::BOTH), 2).", 1, ".$cart_number->cart->id.");";
+    $new_trans = "INSERT INTO "._DB_PREFIX_."ep_frequent_transactions (id_user, id_pagamento, tipo_pagamento, autorizado, valor, ativado, id_cart) VALUES ('".$this->context->customer->id."', '".Tools::getValue('id_payment')."', 'frequent_mbw', 0, ".round((float) $this->context->cart->getOrderTotal(true, Cart::BOTH), 2).", 1, ".$cart_number->cart->id.");";
 
 
 

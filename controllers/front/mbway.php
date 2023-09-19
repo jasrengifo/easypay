@@ -11,8 +11,8 @@ class easypayMbwayModuleFrontController extends ModuleFrontController
         
 
 
-        if(isset($_POST['nome-mp'])){
-            $nome_mp = $_POST['nome-mp'];
+        if(Tools::getValue('nome-mp')){
+            $nome_mp = Tools::getValue('nome-mp');
         }else{
             $nome_mp = '';
         }
@@ -46,8 +46,8 @@ class easypayMbwayModuleFrontController extends ModuleFrontController
 
 
         
-        if(empty($_POST['phonenumber'])){
-            print($_POST['phonenumber']);
+        if(empty(Tools::getValue('phonenumber'))){
+            print(Tools::getValue('phonenumber'));
             print('<div style="width: 100%; text-align: center; margin-top: 30px;"><div style="width: 90%; max-width: 900px; display: inline-block; padding: 10px 20px; background-color: rgba(247, 37, 22, .1); border: 1px solid rgb(247, 37, 22); border-radius: 5px;"><b>Debe escrever o seu numero do telemovel.</b></div><br><a style="color: black;" href="/index.php?controller=Order"><div style="padding: 10px 20px; margin-top: 30px; cursor: pointer; display: inline-block; background-color: #e8e8e8; border-radius: 20px;"><b>Corrigir</b></div></div></div>');
                 die();
             
@@ -72,7 +72,7 @@ if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1){
 
 $is_fequent=0;
 
-        if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+        if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
 
 
             $is_frequent = 1;
@@ -102,7 +102,7 @@ $is_fequent=0;
                     "email" => $this->context->customer->email,
                     "key" => ''.$cart->id.'',
                     //"phone_indicative" => "+351",
-                    "phone" => $_POST['phonenumber'],
+                    "phone" => Tools::getValue('phonenumber'),
                     //"fiscal_number" =>"PT123456789",
                 ],
             ];
@@ -137,7 +137,7 @@ $is_fequent=0;
                     "email" => $this->context->customer->email,
                     "key" => ''.$cart->id.'',
                     //"phone_indicative" => "+351",
-                    "phone" => $_POST['phonenumber'],
+                    "phone" => Tools::getValue('phonenumber'),
                     //"fiscal_number" =>"PT123456789",
                 ],
                 /*"sdd_mandate" => [
@@ -186,7 +186,7 @@ $response = json_decode($response_body, true);
 
 
 
-if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1 && isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1 && Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
 
     if($response['status']=="ok"){
 
@@ -254,7 +254,7 @@ if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1 && isset($_POST['guardar-met
 
         Db::getInstance()->execute($sql);
         
-        if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+        if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
             $is_frequent = 1;
         }else{
             $is_frequent = 0;
@@ -377,7 +377,7 @@ return $response;
             'mbway', // email template file to be use
             'Pagamento com MBWAY - EASYPAY', // email subject
             array(
-                '{telemovel}' =>  number_format($_POST['phonenumber'], 0, ',', ' '),
+                '{telemovel}' =>  number_format(Tools::getValue('phonenumber'), 0, ',', ' '),
                 '{SHOPNAME}' => Configuration::get('PS_SHOP_NAME'),
             ),
             $this->context->customer->email, // receiver email address 

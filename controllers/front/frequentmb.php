@@ -43,89 +43,17 @@ class easypayFrequentmbModuleFrontController extends ModuleFrontController
             
         }
         
-        
-        
-        
-        /*
-        $cart = $this->context->cart_number;
-        $currency = new CurrencyCore($cart->id_currency);
-
-
-
-        $modo_de_pago = 'frequent';
-
-
-
-            $body = [
-
-                "transaction_key" => ''.$cart_number->cart->id.'',
-                "descriptive" => "Pagamento EasyPay",
-                "capture_date" => date("Y-m-d"),
-                "value" => round(floatval($order),2), 
-
-            ];
-
-
-        if(Configuration::get('EASYPAY_TESTES')==1){
-            $URL_EP = "https://api.test.easypay.pt/2.0/capture/".$_POST['id_payment'];
-        }else{
-           $URL_EP = "https://api.prod.easypay.pt/2.0/capture/".$_POST['id_payment'];
-        }
-
-
-        
-        
-
-
-        $headers = [
-            "AccountId: ".Configuration::get('EASYPAY_API_ID'),
-            "ApiKey: ".Configuration::get('EASYPAY_API_KEY'),
-            'Content-Type: application/json',
-        ];
-
-        $curlOpts = [
-            CURLOPT_URL => $URL_EP,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => 1,
-            CURLOPT_TIMEOUT => 60,
-            CURLOPT_POSTFIELDS => json_encode($body),
-            CURLOPT_HTTPHEADER => $headers,
-        ];
-
-
-
-        $curl = curl_init();
-        curl_setopt_array($curl, $curlOpts);
-        $response_body = curl_exec($curl);
-        curl_close($curl);
-        $response = json_decode($response_body, true);
-
-
-
-        $sql = "INSERT INTO "._DB_PREFIX_."ep_requests (status, id_ep_request, method_type, method_status, method_entity, method_reference, customer_easypay, id_cart, first_date, updated, modo_de_pago, nombre_de_pago, id_user) VALUES ('".$response['status']."', '".$response['id']."', '".$response['method']['type']."', '".$response['method']['status']."', '', '', '".$response['customer']['id']."', ".$cart->id.", NOW(), NOW(), '".$modo_de_pago."', '".$nome_mp."', ".$this->context->customer->id.")";
-        // die($sql);
-        Db::getInstance()->execute($sql);
-        
-
-        */
-        
         $sql = 'SELECT * FROM '._DB_PREFIX_.'ep_requests WHERE id_ep_request="776d5b97-13ea-4fca-9592-0ebb999f4bd8"';
         
         $resultado = Db::getInstance()->executeS($sql);
-        
-        
         
         
         $insertar = "INSERT INTO "._DB_PREFIX_."ep_last_mb (cart, id_pagamento) VALUES (".$this->context->cart->id.", '0')";
         Db::getInstance()->execute($insertar);
         
 
-        
-
-        
-        
         return true;
-            }
+    }
     
 
     /**
@@ -227,7 +155,7 @@ class easypayFrequentmbModuleFrontController extends ModuleFrontController
 
         
 
-        $qql = "SELECT * FROM "._DB_PREFIX_."ep_requests WHERE id_ep_request='".$_POST['id_payment']."';";
+        $qql = "SELECT * FROM "._DB_PREFIX_."ep_requests WHERE id_ep_request='".Tools::getValue('id_payment')."';";
         $seleccion2 = Db::getInstance()->executeS($qql);
 
 

@@ -11,8 +11,8 @@ class easypayVisaModuleFrontController extends ModuleFrontController
     private function create_pago_simple(){
         
 
-        if(isset($_POST['nome-mp'])){
-            $nome_mp = $_POST['nome-mp'];
+        if(Tools::getValue('nome-mp')){
+            $nome_mp = Tools::getValue('nome-mp');
         }else{
             $nome_mp = '';
         }
@@ -66,7 +66,7 @@ if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1){
         $modo_de_pago = 'single';
         $is_frequent = 0;
 
-        if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+        if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
             $is_frequent = 1;
             $modo_de_pago = 'frequent';
             
@@ -196,7 +196,7 @@ Db::getInstance()->execute($sql);
 
 
 if($response['status']=="ok"){
-    if(isset($_POST['guardar-metodo']) && $_POST['guardar-metodo']){
+    if(Tools::getValue('guardar-metodo') && Tools::getValue('guardar-metodo')){
         $new_trans = "INSERT INTO "._DB_PREFIX_."ep_frequent_transactions (id_user, id_pagamento, tipo_pagamento, autorizado, valor, ativado, id_cart, autorization, info, created) VALUES ('".$this->context->customer->id."', '".$response["id"]."', 'Frequent visa', 0, ".round((float) $this->context->cart->getOrderTotal(true, Cart::BOTH), 2).", 0, ".$cart->id.", ".Configuration::get('EASYPAY_AUTORIZAR_PAGOS').", 'test', '".date('Y-m-d H:m:s')."');";
     }else{
         $new_trans = "INSERT INTO "._DB_PREFIX_."ep_frequent_transactions (id_user, id_pagamento, tipo_pagamento, autorizado, valor, ativado, id_cart, autorization, info, created) VALUES ('".$this->context->customer->id."', '".$response["id"]."', 'Single visa', 0, ".round((float) $this->context->cart->getOrderTotal(true, Cart::BOTH), 2).", 0, ".$cart->id.", ".Configuration::get('EASYPAY_AUTORIZAR_PAGOS').", 'test', '".date('Y-m-d H:m:s')."');";
