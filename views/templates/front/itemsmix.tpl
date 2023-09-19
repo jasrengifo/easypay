@@ -1,0 +1,1 @@
+{l s='Error: Existem itens em modo de subscrição e outros em modo de não subscrição no seu carrinho. Para prosseguir, apenas podem ser mantidos no carrinho de compras itens de uma das opções por compra.' mod='easypay'}

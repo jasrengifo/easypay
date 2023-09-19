@@ -1,0 +1,1 @@
+<p>EasyPay - Pagamento por Visa / Mastercard</p>

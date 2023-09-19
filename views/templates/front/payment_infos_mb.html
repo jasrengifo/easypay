@@ -1,0 +1,28 @@
+
+<div class="row mb-3">
+  <div class="col-lg-12 text-left">
+
+        <div class="col-lg-12" id="botao-guardar-pagamento-mb">
+            <label>Se deseja guardar o seu metodo de pagamento para futuras compras carregue no botão</label>
+            <button id="guardar-pagamento-mb">Guardar método de Pagamento</button>
+        </div>
+
+        <form action="{$action}" id="payment-form-mb" method="POST">
+            <div id="guardar-pagamento-form" class="col-lg-12 ep-d-none">
+
+     			<div class="ep-d-none">
+     				<input type="checkbox" autocomplete="off"  id="cb-guardar-mb" name="guardar-metodo" value="1">
+				</div>
+
+  				<div>
+  					<label for="vehicle1">Escreva um nome para identificar o seu método de pagamento</label>
+           			<input type="text" name="nome-mp" autocomplete="off" placeholder="Nome">
+           		</div>
+           	</div>
+        </form>
+        <div class="col-lg-12 ep-d-none mt-1" id="no-guardar-pagamento-mb-div">
+        	<button id="no-guardar-pagamento-mb">Cancelar</button>
+        </div>
+  </div>  
+</div>
+
