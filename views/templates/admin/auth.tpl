@@ -54,17 +54,16 @@
 			    {foreach from=$auth item=sub key=subc}
 			    <tr class="mix">
 			        {$respuesta = $sub.respuesta|json_decode}
-    				<td>{$sub.nombre_de_pago}</td>
-    				<td>{$sub.id_user}</td>
-    				<td>{$sub.id_ord}</td>
-    				<td>{$sub.valor}</td>
-    				<td>{$sub.id_pagamento}</td>
+    				<td>{$sub.nombre_de_pago|escape:'html':'UTF-8'}</td>
+    				<td>{$sub.id_user|escape:'html':'UTF-8'}</td>
+    				<td>{$sub.id_ord|escape:'html':'UTF-8'}</td>
+    				<td>{$sub.valor|escape:'html':'UTF-8'}</td>
+    				<td>{$sub.id_pagamento|escape:'html':'UTF-8'}</td>
 
-    				<td>{$sub.tipo_pagamento}</td>
+    				<td>{$sub.tipo_pagamento|escape:'html':'UTF-8'}</td>
 
-    				<td>{$sub.first_date}</td>
+    				<td>{$sub.first_date|escape:'html':'UTF-8'}</td>
     				
-<!--     				<td>{$sub.created}</td> -->
     				
     				{if $sub.ativado == 1}
     					<td><button class="btn btn-success" style="margin-bottom: 5px" onClick="capturar_pagamento('{$sub.id_pagamento}', {$sub.valor}, {$sub.cartt}, 'autorizar');">{l s='Capturar Pagamento' mod='easypay'}</button><br><button class="btn btn-danger" onClick="capturar_pagamento('{$sub.id_pagamento}', {$sub.valor}, {$sub.cartt}, 'cancelar');">{l s='Cancelar Pagamento' mod='easypay'}</button></td>

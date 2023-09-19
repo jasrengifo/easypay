@@ -7,7 +7,7 @@
             <button id="guardar-pagamento-cc">{l s='Guardar método de Pagamento' mod='easypay'}</button>
         </div>
         
-        <form action="{$action}" id="payment-form-cc" method="POST" {if isset($frequente) && $frequente==0}style="display:none"{/if}>
+        <form action="{$action|escape:'html':'UTF-8'}" id="payment-form-cc" method="POST" {if isset($frequente) && $frequente==0}style="display:none"{/if}>
           
           <div id="guardar-pagamento-form" class="col-lg-12 ep-d-none">
 

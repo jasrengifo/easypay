@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-        <form action="{$action}" id="payment-form" method="POST" class="dnonee">
+        <form action="{$action|escape:'html':'UTF-8'}" id="payment-form" method="POST" class="dnonee">
             <label>TOKEN</label>
             <input type="text" name="id_payment" placeholder="" value="{$id_payment}" required><br>
         </form>

@@ -21,13 +21,13 @@
 {if isset($smarty.get.method) && $smarty.get.method=='cc'}
 <h1>{l s='Obrigado por sua compra!' mod='easypay'}</h1>
 <P>{l s='Você será direccionado em breve para a Gateway de pagamento Cartão de Crédito da Easypay.' mod='easypay'}</p>
-<a href="{$smarty.get.url|unescape:"htmlall"}"><button class="success">{l s='Ir agora' mod='easypay'}</button></a>
+<a href="{$smarty.get.url}"><button class="success">{l s='Ir agora' mod='easypay'}</button></a>
 
 <script>
     
     
     function redirect_url(){
-        window.location.replace("{$smarty.get.url|unescape:'htmlall'}");
+        window.location.replace("{$smarty.get.url}");
     }
     
    
@@ -39,13 +39,13 @@
 {if isset($smarty.get.method) && $smarty.get.method=='bb'}
 <h1>{l s='Obrigado por sua compra!' mod='easypay'}</h1>
 <P>{l s='Você será redirecionado em breve para efetuar o pagamento no easypay BOLETO' mod='easypay'}</p>
-<a href="{$smarty.get.url|unescape:"htmlall"}"><button class="success">{l s='Ir agora' mod='easypay'}</button></a>
+<a href="{$smarty.get.url}"><button class="success">{l s='Ir agora' mod='easypay'}</button></a>
 
 <script>
     
     
     function redirect_url(){
-        window.location.replace("{$smarty.get.url|unescape:'htmlall'}");
+        window.location.replace("{$smarty.get.url}");
     }
     
    

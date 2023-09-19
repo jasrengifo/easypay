@@ -4,7 +4,7 @@
 
 
   <div class="col-lg-12" id="caja-entera-rensr">
-        <form action="{$action}" id="payment-form" method="POST">
+        <form action="{$action|escape:'html':'UTF-8'}" id="payment-form" method="POST">
             <label>{l s='Telemovel' mod='easypay'}:</label>
             <input type="text" name="phonenumber" placeholder="{l s='Numero do telemovel' mod='easypay'}" id="input-rensr-mbw2" required>
 

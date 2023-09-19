@@ -9,7 +9,7 @@
 
   <div class="col-lg-12 text-left">
 
-        <form action="{$action}" id="payment-form-mb" method="POST">
+        <form action="{$action|escape:'html':'UTF-8'}" id="payment-form-mb" method="POST">
             <div id="guardar-pagamento-form-mb" class="col-lg-12">
 
      			<div class="">
