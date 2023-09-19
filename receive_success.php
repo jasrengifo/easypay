@@ -1,12 +1,25 @@
 <?php
+/**
+ * Easypay
+ *
+ * Direitos autorais (c) 2023 Trigenius
+ * 
+ * Todos os direitos reservados.
+ * 
+ * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
+ * 
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
+ */
+
+
 include_once('../../config/config.inc.php');
 include_once('../../init.php');
-
-
-
-
-
-// $_SERVER['REMOTE_ADDR']
 
 if(Configuration::get('EASYPAY_API_IP')!='' AND $_SERVER['REMOTE_ADDR']==Configuration::get('EASYPAY_API_IP')){
     die('IP não valida');
@@ -204,7 +217,7 @@ else if($respuesta['status']=='success' && $respuesta['type']=='authorisation'){
                 "transaction_key" => $respuesta['key'],
                 "descriptive" => "Pagamento EasyPay",
                 "capture_date" => date("Y-m-d"),
-                "value" => round(floatval($precio['0']['total_paid']), 2), //asumo que el value es lo que pago el cliente aca, debe de ser entre el min y max
+                "value" => round((float)$precio['0']['total_paid'], 2), //asumo que el value es lo que pago el cliente aca, debe de ser entre el min y max
 
             ];
 
@@ -292,7 +305,7 @@ else if($respuesta['status']=='success' && $respuesta['type']=='frequent_create'
                 "transaction_key" => $respuesta['key'],
                 "descriptive" => "Pagamento EasyPay",
                 "capture_date" => date("Y-m-d"),
-                "value" => round(floatval($precio['0']['total_paid']), 2), //asumo que el value es lo que pago el cliente aca, debe de ser entre el min y max
+                "value" => round((float)$precio['0']['total_paid'], 2), //asumo que el value es lo que pago el cliente aca, debe de ser entre el min y max
 
             ];
 
@@ -466,7 +479,7 @@ else if($respuesta['status']=='success' && $respuesta['type']!='subscription_cap
                 "transaction_key" => $respuesta['key'],
                 "descriptive" => "Pagamento EasyPay",
                 "capture_date" => date("Y-m-d"),
-                "value" => round(floatval($precio['0']['total_paid']), 2), //asumo que el value es lo que pago el cliente aca, debe de ser entre el min y max
+                "value" => round((float)$precio['0']['total_paid'], 2), //asumo que el value es lo que pago el cliente aca, debe de ser entre el min y max
 
             ];
 
@@ -515,39 +528,7 @@ else if($respuesta['status']=='success' && $respuesta['type']!='subscription_cap
 
 
 
-    // $body = [
-
-    //     "transaction_key" => $respuesta['key'],
-    //     "descriptive" => "Auto-Capture Prestashop",
-    //     "capture_date" => date("Y-m-d"),
-    //     "value" => floatval(10), 
-
-    // ];
-
-
-    // $url = "https://api.test.easypay.pt/2.0/capture/" . $id;
-
-    // $headers = [
-    //     "AccountId: 56e7a6b4-41ba-4d3e-8578-2760563841bb",
-    //     "ApiKey: 16d0899a-e055-496d-8d03-afe7139bff0a",
-    //     'Content-Type: application/json',
-    // ];
-
-    // $curlOpts = [
-    //     CURLOPT_URL => $url,
-    //     CURLOPT_RETURNTRANSFER => true,
-    //     CURLOPT_POST => 1,
-    //     CURLOPT_TIMEOUT => 120,
-    //     CURLOPT_POSTFIELDS => json_encode($body),
-    //     CURLOPT_HTTPHEADER => $headers,
-    // ];
-
-    // $curl = curl_init();
-    // curl_setopt_array($curl, $curlOpts);
-    // $response_body = curl_exec($curl);
-    // curl_close($curl);
-    // $response = json_decode($response_body, true);
-
+   
 
     
     Mail::Send(

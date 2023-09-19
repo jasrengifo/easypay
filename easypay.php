@@ -1,4 +1,21 @@
 <?php
+/**
+ * Easypay
+ *
+ * Direitos autorais (c) 2023 Trigenius
+ * 
+ * Todos os direitos reservados.
+ * 
+ * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
+ * 
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
+ */
 if(!defined('_PS_VERSION_')){
 	exit;
 }
@@ -1552,30 +1569,30 @@ public function getContent()
     $output = null;
 
     if (Tools::isSubmit('submit'.$this->name)) {
-        $api_id = strval(Tools::getValue('EASYPAY_API_ID'));
-        $api_key = strval(Tools::getValue('EASYPAY_API_KEY'));
-        $api_visa = strval(Tools::getValue('PRESTASHOP_INPUT_SWITCH'));
-        $api_multibanco = strval(Tools::getValue('activar_multibanco'));
-        $api_mbw = strval(Tools::getValue('activar_mbw'));
-        $api_ip = strval(Tools::getValue('EASYPAY_IP'));
-        $api_dd = strval(Tools::getValue('activar_dd'));
-        $api_bb = strval(Tools::getValue('activar_bb'));
-        $api_testes = strval(Tools::getValue('activar_testes'));
-        $autorizar_pagos = strval(Tools::getValue('autorizar_pagos'));
+        $api_id = (string)Tools::getValue('EASYPAY_API_ID');
+        $api_key = (string)Tools::getValue('EASYPAY_API_KEY');
+        $api_visa = (string)Tools::getValue('PRESTASHOP_INPUT_SWITCH');
+        $api_multibanco = (string)Tools::getValue('activar_multibanco');
+        $api_mbw = (string)Tools::getValue('activar_mbw');
+        $api_ip = (string)Tools::getValue('EASYPAY_IP');
+        $api_dd = (string)Tools::getValue('activar_dd');
+        $api_bb = (string)Tools::getValue('activar_bb');
+        $api_testes = (string)Tools::getValue('activar_testes');
+        $autorizar_pagos = (string)Tools::getValue('autorizar_pagos');
 
-        $api_visa_min = floatval(Tools::getValue('EASYPAY_MIN_VISA'));
-        $api_visa_max = floatval(Tools::getValue('EASYPAY_MAX_VISA'));
+        $api_visa_min = (float)Tools::getValue('EASYPAY_MIN_VISA');
+        $api_visa_max = (float)Tools::getValue('EASYPAY_MAX_VISA');
 
-        $api_mb_min = floatval(Tools::getValue('EASYPAY_MIN_MB'));
-        $api_mb_max = floatval(Tools::getValue('EASYPAY_MAX_MB'));
+        $api_mb_min = (float)Tools::getValue('EASYPAY_MIN_MB');
+        $api_mb_max = (float)Tools::getValue('EASYPAY_MAX_MB');
 
-        $api_mbway_min = floatval(Tools::getValue('EASYPAY_MIN_MBWAY'));
-        $api_mbway_max = floatval(Tools::getValue('EASYPAY_MAX_MBWAY'));
+        $api_mbway_min = (float)Tools::getValue('EASYPAY_MIN_MBWAY');
+        $api_mbway_max = (float)Tools::getValue('EASYPAY_MAX_MBWAY');
 
-        $api_dd_min = floatval(Tools::getValue('EASYPAY_MIN_DD'));
-        $api_dd_max = floatval(Tools::getValue('EASYPAY_MAX_DD'));
-        $api_dias_esquecer = floatval(Tools::getValue('EASYPAY_DIAS_ESQUECER'));
-        $api_dias_esquecer_mb = floatval(Tools::getValue('EASYPAY_DIAS_ESQUECER_MB'));
+        $api_dd_min = (float)Tools::getValue('EASYPAY_MIN_DD');
+        $api_dd_max = (float)Tools::getValue('EASYPAY_MAX_DD');
+        $api_dias_esquecer = (float)Tools::getValue('EASYPAY_DIAS_ESQUECER');
+        $api_dias_esquecer_mb = (float)Tools::getValue('EASYPAY_DIAS_ESQUECER_MB');
         
             
 

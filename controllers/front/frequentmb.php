@@ -1,5 +1,20 @@
 <?php
 /**
+ * Easypay
+ *
+ * Direitos autorais (c) 2023 Trigenius
+ * 
+ * Todos os direitos reservados.
+ * 
+ * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
+ * 
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
  */
  ini_set('precision', 10);
 ini_set('serialize_precision', 10);
@@ -125,49 +140,15 @@ class easypayFrequentmbModuleFrontController extends ModuleFrontController
 
 
 
-    
-    // Mail::Send(
-    //     (int)(Configuration::get('PS_LANG_DEFAULT')), // defaut language id
-    //     'visa', // email template file to be use
-    //     'Pagamento com VISA - EASYPAY', // email subject
-    //     array(
-    //         '{URL}' => $multibanco['method']['url'],
-    //         '{SHOPNAME}' => Configuration::get('PS_SHOP_NAME'),
-    //     ),
-    //     $this->context->customer->email, // receiver email address 
-    //     NULL, //receiver name
-    //     NULL, //from email address
-    //     NULL,  //from name
-    //     NULL,
-    //     NULL,
-    //     _PS_BASE_URL_.__PS_BASE_URI__.'modules/easypay/mails/'
-    // );
-        /**
-         * Redirect the customer to the order confirmation page
-         */
 
     if($order==1){
         $esql = "SELECT * FROM "._DB_PREFIX_."orders WHERE id_cart=".$cart->id;
         $seleccion = Db::getInstance()->executeS($esql);
 
-
         $multibanco = $this->create_pago_simple($seleccion[0]['total_paid'], $this->context);
-
-        
 
         $qql = "SELECT * FROM "._DB_PREFIX_."ep_requests WHERE id_ep_request='".Tools::getValue('id_payment')."';";
         $seleccion2 = Db::getInstance()->executeS($qql);
-
-
-
-
-
-
-        // if($multibanco['status']!='ok'){
-
-        //     print_r($multibanco);
-        //     die('ERRO DE COMUNICAÇÂO COM O API DO EASYPAY TENTE NOVAMENTE EM 5 MINUTOS');
-        // }
             
         $sql = "INSERT INTO "._DB_PREFIX_."ep_orders (method, id_cart, link, title) VALUES ('mb', ".(int)$cart->id.", '-', 'Pagar Agora: ')";
         Db::getInstance()->execute($sql);

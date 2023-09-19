@@ -1,5 +1,21 @@
 <?php
-
+/**
+ * Easypay
+ *
+ * Direitos autorais (c) 2023 Trigenius
+ * 
+ * Todos os direitos reservados.
+ * 
+ * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
+ * 
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
+ */
 ini_set('precision', 10);
 ini_set('serialize_precision', 10);
 class easypayVisaModuleFrontController extends ModuleFrontController
@@ -52,8 +68,8 @@ class easypayVisaModuleFrontController extends ModuleFrontController
                 "key" => ''.$cart->id.'',
                 "method" => "cc",
                 "type" => "sale",
-                "min_value" => floatval(1), //Precio minimo que puede pagar el cliente
-                "max_value" => floatval(500), //Precio maximo que puede pagar el cliente
+                "min_value" => (float)1, //Precio minimo que puede pagar el cliente
+                "max_value" => (float)500, //Precio maximo que puede pagar el cliente
                 "currency" => $currency->iso_code,
                 "expiration_time" =>"2020-12-31 12:00", //fecha en la que expira el pago frecuente ********CAMBIAR******
                 "customer" => [

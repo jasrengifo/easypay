@@ -1,5 +1,20 @@
 <?php
 /**
+ * Easypay
+ *
+ * Direitos autorais (c) 2023 Trigenius
+ * 
+ * Todos os direitos reservados.
+ * 
+ * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
+ * 
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
  */
  ini_set('precision', 10);
 ini_set('serialize_precision', 10);
@@ -16,13 +31,6 @@ class easypayVisaModuleFrontController extends ModuleFrontController
         }else{
             $nome_mp = '';
         }
-        
-
-        
-            
-
-        
-
         //Validar si todos los articulos son de suscripcion    
         $productos_actuales = Context::getContext()->cart->getProducts();
         $cat_valido = 1;
@@ -78,33 +86,17 @@ if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1){
                 "key" => ''.$cart->id.'',
                 "method" => "cc",
                 "type"  => $type_pago,
-                "min_value" => floatval(Configuration::get('EASYPAY_MIN_VISA')), //Precio minimo que puede pagar el cliente
-                "max_value" => floatval(Configuration::get('EASYPAY_MAX_VISA')), //Precio maximo que puede pagar el cliente
+                "min_value" => (float)Configuration::get('EASYPAY_MIN_VISA'), //Precio minimo que puede pagar el cliente
+                "max_value" => (float)Configuration::get('EASYPAY_MAX_VISA'), //Precio maximo que puede pagar el cliente
                 "currency" => $currency->iso_code,
-                "expiration_time" =>$expirar, //fecha en la que expira el pago frecuente ********CAMBIAR******
+                "expiration_time" =>$expirar, 
                 "customer" => [
                     "name" => $this->context->customer->firstname.' '.$this->context->customer->lastname,
                     "email" => $this->context->customer->email,
                     "key" => ''.$cart->id.'',
-                    //"phone_indicative" => "+351",
-                    //"phone" => "911234567",
-                    //"fiscal_number" =>"PT123456789",
-                ],
-                    //"sdd_mandate" => [
-                    //"name" => "Name Example",
-                    //"email" => "sdd_email@example.com",
-                    //"account_holder" => "Account Holder Example",
-                    //"key" => "SDD Key Example",
-                    //"iban" => "PT50002700000001234567833",
-                    //"phone" => "911234567",
-                    //"max_num_debits" =>"12", //numero maximo de debitos, esto solo aplica en dd, si mal no recuerdo
-                // ],
-            ];
-            
-            
-            
 
-            // Db::getInstance()->execute($new_trans);
+                ],
+            ];
 
             if(Configuration::get('EASYPAY_TESTES')==1){
                 $URL_EP = "https://api.test.easypay.pt/2.0/frequent";

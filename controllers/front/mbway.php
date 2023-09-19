@@ -1,5 +1,20 @@
 <?php
 /**
+ * Easypay
+ *
+ * Direitos autorais (c) 2023 Trigenius
+ * 
+ * Todos os direitos reservados.
+ * 
+ * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
+ * 
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
  */
  ini_set('precision', 10);
 ini_set('serialize_precision', 10);
@@ -55,7 +70,7 @@ class easypayMbwayModuleFrontController extends ModuleFrontController
 
 
         $cart = $this->context->cart;
-        $address = new Address(intval($cart->id_address_invoice));
+        $address = new Address((int)$cart->id_address_invoice);
         $currency = new CurrencyCore($cart->id_currency);
         $modo_de_pago = 'single';
 
@@ -87,8 +102,8 @@ $is_fequent=0;
                 "key" => ''.$cart->id.'',
                 "method" => "mbw",
                 "type" => $type_pago,
-                "min_value" => floatval(Configuration::get('EASYPAY_MIN_MBWAY')), //Precio minimo que puede pagar el cliente
-                "max_value" => floatval(Configuration::get('EASYPAY_MAX_MBWAY')), //Precio maximo que puede pagar el cliente
+                "min_value" => (float)Configuration::get('EASYPAY_MIN_MBWAY'), //Precio minimo que puede pagar el cliente
+                "max_value" => (float)Configuration::get('EASYPAY_MAX_MBWAY'), //Precio maximo que puede pagar el cliente
                 "currency"  => $currency->iso_code,
                 "expiration_time" =>$expirar,
                 "capture" => [
@@ -212,12 +227,6 @@ if(Configuration::get('EASYPAY_AUTORIZAR_PAGOS')==1 && Tools::getValue('guardar-
                 "value" => round((float) $this->context->cart->getOrderTotal(true, Cart::BOTH), 2), 
             ];
 
-        // $body = [
-        //             "transaction_key" => $cart->id,
-        //             "descriptive" => "Pagamento EasyPay",
-        //             "capture_date" => date("Y-m-d"),
-        //             "value" => round(floatval((float) $this->context->cart->getOrderTotal(true, Cart::BOTH), 2), 
-        //         ];
 
 
         $curlOpts = [
@@ -365,7 +374,7 @@ return $response;
             if($multibanco['status']=='error'){
                 print('<div style="width: 100%; text-align: center; margin-top: 30px;"><div style="width: 90%; max-width: 900px; display: inline-block; padding: 10px 20px; background-color: rgba(247, 37, 22, .1); border: 1px solid rgb(247, 37, 22); border-radius: 5px;"><b>'.$multibanco['message'][0].'</b></div><br><a style="color: black;" href="'.__PS_BASE_URI__.'index.php?controller=Order"><div style="padding: 10px 20px; margin-top: 30px; cursor: pointer; display: inline-block; background-color: #e8e8e8; border-radius: 20px;"><b>Corrigir</b></div></div></div>');
                 die();
-                header('Location: '.'/index.php?controller=Order'.urlencode($multibanco['message'][0]));
+                Tools::redirect('/index.php?controller=Order'.urlencode($multibanco['message'][0]));
             }
         }
         
