@@ -1,8 +1,11 @@
 <?php
+
 /**
  * Easypay
  *
  * Direitos autorais (c) 2023 Trigenius
+ * 
+ * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
@@ -18,9 +21,3 @@
  */
 include_once('../../config/config.inc.php');
 include_once('../../init.php');
-
-
-
-
-
- ?>

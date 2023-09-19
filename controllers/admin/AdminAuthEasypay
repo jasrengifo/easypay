@@ -1,8 +1,11 @@
 <?php
+
 /**
  * Easypay
  *
  * Direitos autorais (c) 2023 Trigenius
+ * 
+ * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
@@ -16,7 +19,7 @@
  * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
  * NEGOCIAÇÕES NO SOFTWARE.
  */
-include(_PS_MODULE_DIR_.'easypay/easypay.php');
+include(_PS_MODULE_DIR_ . 'easypay/easypay.php');
 
 
 class AdminAuthEasypayController extends ModuleAdminController
@@ -25,36 +28,32 @@ class AdminAuthEasypayController extends ModuleAdminController
 
 	public function __construct()
 	{
-	    $this->bootstrap = true;
-	    $this->context = Context::getContext();
+		$this->bootstrap = true;
+		$this->context = Context::getContext();
 
 
-	    parent::__construct();
+		parent::__construct();
 	}
 
 
 	public function initContent()
 	{
-	     parent::initContent();
-
+		parent::initContent();
 	}
 
-	 
+
 
 	public function renderList()
 
 	{
-	        $sql = "SELECT * FROM "._DB_PREFIX_."subscrip ORDER BY id_susc DESC";
-	        $subs = Db::getInstance()->executeS($sql);
-	        $this->context->smarty->assign(
-                array(
-                    'subs' => $subs
-                    )
+		$sql = "SELECT * FROM " . _DB_PREFIX_ . "subscrip ORDER BY id_susc DESC";
+		$subs = Db::getInstance()->executeS($sql);
+		$this->context->smarty->assign(
+			array(
+				'subs' => $subs
+			)
 
-            );
-	        return $this->module->display(_PS_MODULE_DIR_.'easypay', 'views/templates/admin/teste.tpl');
+		);
+		return $this->module->display(_PS_MODULE_DIR_ . 'easypay', 'views/templates/admin/teste.tpl');
 	}
-
 }
-
-?>

@@ -1,8 +1,11 @@
 <?php
+
 /**
  * Easypay
  *
  * Direitos autorais (c) 2023 Trigenius
+ * 
+ * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
@@ -44,59 +47,54 @@ class Cart extends CartCore
     ) {
         $id_cart = $this->id;
         $cart = new Cart($id_cart);
-        $products_in_cart = $cart->getProducts(); 
-        
+        $products_in_cart = $cart->getProducts();
+
         $have_others = 0;
         $have_subs = 0;
         $actual_product = 0; //0 no Subsc - 1 Subsc 
-        
+
         //product to add
-        foreach(Product::getProductCategoriesFull($id_product) as $categoria){
-            
-            
-            if($categoria['id_category']==Configuration::get('EASYPAY_CATEGORY_SUSCP')){
+        foreach (Product::getProductCategoriesFull($id_product) as $categoria) {
+
+
+            if ($categoria['id_category'] == Configuration::get('EASYPAY_CATEGORY_SUSCP')) {
                 $actual_product = 1;
             }
-    
         }
-        
-        foreach($products_in_cart as $product){
-  
+
+        foreach ($products_in_cart as $product) {
+
             $activador = 0;
-            foreach(Product::getProductCategoriesFull($product['id_product']) as $categoria){
-    
-                if($categoria['id_category']==Configuration::get('EASYPAY_CATEGORY_SUSCP')){
+            foreach (Product::getProductCategoriesFull($product['id_product']) as $categoria) {
+
+                if ($categoria['id_category'] == Configuration::get('EASYPAY_CATEGORY_SUSCP')) {
                     $have_subs = 1;
                     $activador = 1;
                 }
-    
             }
-            if($activador == 0){
+            if ($activador == 0) {
                 $have_other = 1;
             }
-            
         }
-    
-        if($actual_product==1 && $have_other==1){
+
+        if ($actual_product == 1 && $have_other == 1) {
             die('Só pode ter um produto de subscrição no carrinho. Deve remover os outros produtos.');
-        }else if($actual_product==0 && $have_subs==1){
+        } else if ($actual_product == 0 && $have_subs == 1) {
             die('Só pode ter um produto de subscrição no carrinho. Deve remover os outros produtos.');
         }
 
 
         return parent::updateQty(
-        $quantity,
-        $id_product,
-        $id_product_attribute,
-        $id_customization,
-        $operator,
-        $id_address_delivery,
-        $shop,
-        $auto_add_cart_rule,
-        $skipAvailabilityCheckOutOfStock,
-        $preserveGiftRemoval);
+            $quantity,
+            $id_product,
+            $id_product_attribute,
+            $id_customization,
+            $operator,
+            $id_address_delivery,
+            $shop,
+            $auto_add_cart_rule,
+            $skipAvailabilityCheckOutOfStock,
+            $preserveGiftRemoval
+        );
     }
-
 }
-
-?>

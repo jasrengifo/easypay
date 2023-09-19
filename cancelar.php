@@ -1,8 +1,11 @@
 <?php
+
 /**
  * Easypay
  *
  * Direitos autorais (c) 2023 Trigenius
+ * 
+ * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
@@ -17,5 +20,3 @@
  * NEGOCIAÇÕES NO SOFTWARE.
  */
 echo json_encode('CANCELADO');
-
-?>

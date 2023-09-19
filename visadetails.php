@@ -1,8 +1,11 @@
 <?php
+
 /**
  * Easypay
  *
  * Direitos autorais (c) 2023 Trigenius
+ * 
+ * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
@@ -17,7 +20,7 @@
  * NEGOCIAÇÕES NO SOFTWARE.
  */
 
- 
+
 include_once('../../config/config.inc.php');
 include_once('../../init.php');
 
@@ -42,19 +45,17 @@ if ($api_auth['account_id'] != Tools::getValue('id')) {
 
 try {
 
-    $isOrderX = Db::getInstance()->getRow(' SELECT * FROM '._DB_PREFIX_.'orders WHERE id_cart = '.Tools::getValue('t_key').'');
+    $isOrderX = Db::getInstance()->getRow(' SELECT * FROM ' . _DB_PREFIX_ . 'orders WHERE id_cart = ' . Tools::getValue('t_key') . '');
 
-    $newURL = _PS_BASE_URL_.__PS_BASE_URI__."index.php?controller=order-detail&id_order=".$isOrderX['id_order'];
+    $newURL = _PS_BASE_URL_ . __PS_BASE_URI__ . "index.php?controller=order-detail&id_order=" . $isOrderX['id_order'];
     Tools::redirect($newURL);
-
 } catch (Exception $ex) {
-    $xml.= '<ep_status>'      . 'err'                .'</ep_status>' . PHP_EOL;
-    $xml.= '<ep_message>'     . $ex->getMessage()    .'</ep_message>' . PHP_EOL;
-    $xml.= '<ep_entity>'      . $obj->ep_entity      .'</ep_entity>' . PHP_EOL;
-    $xml.= '<ep_reference>'   . $obj->ep_reference   .'</ep_reference>' . PHP_EOL;
-    $xml.= '<ep_value>'       . $obj->ep_value       .'</ep_value>' . PHP_EOL;
+    $xml .= '<ep_status>'      . 'err'                . '</ep_status>' . PHP_EOL;
+    $xml .= '<ep_message>'     . $ex->getMessage()    . '</ep_message>' . PHP_EOL;
+    $xml .= '<ep_entity>'      . $obj->ep_entity      . '</ep_entity>' . PHP_EOL;
+    $xml .= '<ep_reference>'   . $obj->ep_reference   . '</ep_reference>' . PHP_EOL;
+    $xml .= '<ep_value>'       . $obj->ep_value       . '</ep_value>' . PHP_EOL;
 }
 
-$xml.= '</get_detail>' . PHP_EOL;
+$xml .= '</get_detail>' . PHP_EOL;
 echo $xml;
-?>

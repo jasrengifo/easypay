@@ -1,5 +1,5 @@
 <?php
-include(_PS_MODULE_DIR_.'easypay/easypay.php');
+include(_PS_MODULE_DIR_ . 'easypay/easypay.php');
 
 
 class AdminEasyPayController extends ModuleAdminController
@@ -8,46 +8,41 @@ class AdminEasyPayController extends ModuleAdminController
 
 	public function __construct()
 	{
-	    $this->bootstrap = true;
-	    $this->context = Context::getContext();
+		$this->bootstrap = true;
+		$this->context = Context::getContext();
 
 
-	    parent::__construct();
+		parent::__construct();
 	}
 
 
 	public function initContent()
 	{
-	     parent::initContent();
-
+		parent::initContent();
 	}
 
-	 
+
 
 	public function renderList()
 
 	{
 
-			if(Tools::getValue('pesquisar')){
-				$sql = "SELECT * FROM esp_subscrip INNER JOIN "._DB_PREFIX_."orders a ON a.id_order = esp_subscrip.id_order AND (a.reference LIKE '%".Tools::getValue('pesquisar')."%' OR a.id_order = '".Tools::getValue('pesquisar')."' ) ORDER BY id_susc DESC";
-				
-			}else{
-				$sql = "SELECT * FROM "._DB_PREFIX_."subscrip ORDER BY id_susc DESC";
-			}
+		if (Tools::getValue('pesquisar')) {
+			$sql = "SELECT * FROM esp_subscrip INNER JOIN " . _DB_PREFIX_ . "orders a ON a.id_order = esp_subscrip.id_order AND (a.reference LIKE '%" . Tools::getValue('pesquisar') . "%' OR a.id_order = '" . Tools::getValue('pesquisar') . "' ) ORDER BY id_susc DESC";
+		} else {
+			$sql = "SELECT * FROM " . _DB_PREFIX_ . "subscrip ORDER BY id_susc DESC";
+		}
 
 
-			// die($sql);
+		// die($sql);
 
-	        $subs = Db::getInstance()->executeS($sql);
-	        $this->context->smarty->assign(
-                array(
-                    'subs' => $subs
-                    )
+		$subs = Db::getInstance()->executeS($sql);
+		$this->context->smarty->assign(
+			array(
+				'subs' => $subs
+			)
 
-            );
-	        return $this->module->display(_PS_MODULE_DIR_.'easypay', 'views/templates/admin/teste.tpl');
+		);
+		return $this->module->display(_PS_MODULE_DIR_ . 'easypay', 'views/templates/admin/teste.tpl');
 	}
-
 }
-
-?>
