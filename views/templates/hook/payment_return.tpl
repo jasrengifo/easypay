@@ -1,4 +1,4 @@
-{*
+{**
  * 2007-2023 Easypay por Trigénius
  *
  * NOTICE OF LICENSE
@@ -15,7 +15,7 @@
  * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
  * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  *}
- 
+
 {if isset($smarty.get.method) && $smarty.get.method=='mb'}
 <h1>{l s='Obrigado por sua compra!' mod='easypay'}</h1>
 <P>{l s='Para fazer o pagamento deve dirigir-se a um terminal multibanco e usar os seguintes dados' mod='easypay'}:

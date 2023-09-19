@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Easypay
  * @author Trigenius
  *
@@ -79,6 +79,6 @@ $history->add();
 echo  Tools::getValue('id_sub');
 print_r($response);
 
-Tools:
+
 redirect(__PS_BASE_URI__ . "index.php?controller=order-detail&id_order=" . $history->id_order . "");
 die();

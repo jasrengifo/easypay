@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Easypay
  * @author Trigenius
  *
@@ -25,9 +25,6 @@ class easypayVisafowardModuleFrontController extends ModuleFrontController
     public function initContent()
     {
         parent::initContent();
-
-
-
 
         $this->context->smarty->assign(array(
             'ativar_nome' => Configuration::get('activar_nome'),

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Easypay
  * @author Trigenius
  *

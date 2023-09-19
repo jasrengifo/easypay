@@ -1,4 +1,4 @@
-{*
+{**
  * 2007-2023 Easypay por Trigénius
  *
  * NOTICE OF LICENSE
@@ -15,7 +15,7 @@
  * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
  * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  *}
- 
+
 {if $have_products_in_cart==1}
 	{if $actual==0}
 		{if $have_subs==1}

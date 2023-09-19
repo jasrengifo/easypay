@@ -1,4 +1,4 @@
-{*
+{**
  * 2007-2023 Easypay por Trigénius
  *
  * NOTICE OF LICENSE
