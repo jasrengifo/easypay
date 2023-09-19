@@ -1,14 +1,14 @@
 <?php
-/**
+/*
  * Easypay
+ * @author Trigenius
  *
  * @copyright Direitos autorais (c) 2023 Trigenius
  * 
- * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
- * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
  * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  * 
  * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
@@ -1049,7 +1049,7 @@ class easypay extends PaymentModule
             return;
         }
 
-        /**
+        /*
          * Form action URL. The form data will be sent to the
          * validation controller when the user finishes
          * the order process.
@@ -1081,7 +1081,7 @@ class easypay extends PaymentModule
 
 
 
-        /**
+        /*
          * Create a PaymentOption object containing the necessary data
          * to display this module in the checkout
          */
@@ -1094,7 +1094,7 @@ class easypay extends PaymentModule
 
 
 
-        /**
+        /*
          * Create Multibanco option
          */
 
@@ -1221,7 +1221,7 @@ class easypay extends PaymentModule
             ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_ . $this->name . '/views/img/boleto30.png'));
         //->setForm($paymentForm);
 
-        /**
+        /*
          *  Load form template to be displayed in the checkout step
          */
 
@@ -1511,7 +1511,7 @@ class easypay extends PaymentModule
 
     public function hookPaymentReturn($params)
     {
-        /**
+        /*
          * Verify if this module is enabled
          */
         if (!$this->active) {

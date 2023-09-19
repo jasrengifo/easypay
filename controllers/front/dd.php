@@ -1,14 +1,14 @@
 <?php
-/**
+/*
  * Easypay
+ * @author Trigenius
  *
  * @copyright Direitos autorais (c) 2023 Trigenius
  * 
- * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
- * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
  * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  * 
  * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
@@ -277,21 +277,21 @@ class easypayDdModuleFrontController extends ModuleFrontController
     }
 
 
-    /**
+    /*
      * Processa os dados enviados pelo formulário de pagamento
      */
     public function postProcess()
     {
 
 
-        /**
+        /*
          * Get current cart object from session
          */
         $cart = $this->context->cart;
         $authorized = false;
 
 
-        /**
+        /*
          * Verify if this module is enabled and if the cart has
          * a valid customer, delivery address and invoice address
          */
@@ -302,7 +302,7 @@ class easypayDdModuleFrontController extends ModuleFrontController
             Tools::redirect('index.php?controller=order&step=1');
         }
 
-        /**
+        /*
          * Verify if this payment module is authorized
          */
 
@@ -317,17 +317,17 @@ class easypayDdModuleFrontController extends ModuleFrontController
             die($this->l('This payment method is not available.'));
         }
 
-        /** @var CustomerCore $customer */
+        /* @var CustomerCore $customer */
         $customer = new Customer($cart->id_customer);
 
-        /**
+        /*
          * Check if this is a valid customer account
          */
         if (!Validate::isLoadedObject($customer)) {
             Tools::redirect('index.php?controller=order&step=1');
         }
 
-        /**
+        /*
          *Validar pago com mutlibanco
          */
         $multibanco = $this->create_pago_simple();
@@ -366,7 +366,7 @@ class easypayDdModuleFrontController extends ModuleFrontController
         );
 
 
-        /**
+        /*
          * Place the order
          */
         $this->module->validateOrder(
@@ -381,7 +381,7 @@ class easypayDdModuleFrontController extends ModuleFrontController
             $customer->secure_key
         );
         print_r('easypay');
-        /**
+        /*
          * Redirect the customer to the order confirmation page
          */
         Tools::redirect('index.php?controller=order-confirmation&id_cart=' . (int)$cart->id . '&id_module=' . (int)$this->module->id . '&id_order=' . $this->module->currentOrder . '&key=' . $customer->secure_key . '&method=' . $multibanco['method']['type'] . '&monto=' . ' ' . (float) $this->context->cart->getOrderTotal(true, Cart::BOTH) . '');

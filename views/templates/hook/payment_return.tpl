@@ -1,8 +1,21 @@
 {*
- * EasyPay, a module for Prestashop 1.7
+ * 2007-2023 Easypay por Trigénius
  *
- * Form to be displayed in the payment step
+ * NOTICE OF LICENSE
+ *
+ * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
+ * INCLUINDO MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO
+ * E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS
+ * POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRAS RESPONSABILIDADES, SEJA EM UMA AÇÃO DE CONTRATO, DELITO
+ * OU QUALQUER OUTRO MOTIVO, QUE SURJA DE, FORA DE OU EM RELAÇÃO COM O SOFTWARE OU O USO OU OUTRAS
+ * NEGOCIAÇÕES NO SOFTWARE.
+ *
+ * @author    Trigenius
+ * @copyright Direitos autorais (c) 2023 Trigenius
+ * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  *}
+ 
 {if isset($smarty.get.method) && $smarty.get.method=='mb'}
 <h1>{l s='Obrigado por sua compra!' mod='easypay'}</h1>
 <P>{l s='Para fazer o pagamento deve dirigir-se a um terminal multibanco e usar os seguintes dados' mod='easypay'}:

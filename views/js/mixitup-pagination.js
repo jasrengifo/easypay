@@ -1,11 +1,11 @@
-/**!
+/*
  * MixItUp Pagination v3.3.0
  * Client-side pagination for filtered and sorted content
  * Build 875b7d31-63d1-4040-ac6f-b1c814027891
  *
  * Requires mixitup.js >= v^3.1.8
  *
- * @copyright Copyright 2014-2017 KunkaLabs Limited.
+ * @copyright Copyright 2014-2023 KunkaLabs Limited.
  * @author    KunkaLabs Limited.
  * @link      https://www.kunkalabs.com/mixitup-pagination/
  *
@@ -34,7 +34,7 @@
             );
         }
 
-        /**
+        /*
          * A group of optional callback functions to be invoked at various
          * points within the lifecycle of a mixer operation.
          *
@@ -47,7 +47,7 @@
          */
 
         mixitup.ConfigCallbacks.registerAction('afterConstruct', 'pagination', function() {
-            /**
+            /*
              * A callback function invoked whenever a pagination operation starts.
              *
              * This function is equivalent to `onMixStart`, and is invoked immediately
@@ -64,7 +64,7 @@
 
             this.onPaginateStart = null;
 
-            /**
+            /*
              * A callback function invoked whenever a pagination operation ends.
              *
              * This function is equivalent to `onMixEnd`, and is invoked immediately
@@ -81,7 +81,7 @@
             this.onPaginateEnd = null;
         });
 
-        /**
+        /*
          * A group of properties defining the output and structure of class names programmatically
          * added to controls and containers to reflect the state of the mixer.
          *
@@ -95,7 +95,7 @@
 
         mixitup.ConfigClassNames.registerAction('afterConstruct', 'pagination', function() {
 
-            /**
+            /*
              * The "element" portion of the class name added to pager controls.
              *
              * @example <caption>Example: changing the `config.classNames.elementPager` value</caption>
@@ -119,7 +119,7 @@
 
             this.elementPager = 'control';
 
-            /**
+            /*
              * The "element" portion of the class name added to the page list element, when it is
              * in its disabled state.
              *
@@ -146,7 +146,7 @@
 
             this.elementPageList = 'page-list';
 
-            /**
+            /*
              * The "element" portion of the class name added to the page stats element, when it is
              * in its disabled state.
              *
@@ -174,7 +174,7 @@
 
             this.elementPageStats = 'page-stats';
 
-            /**
+            /*
              * The "modifier" portion of the class name added to the first pager in the list of pager controls.
              *
              * @name        modifierFirst
@@ -186,7 +186,7 @@
 
             this.modifierFirst = 'first';
 
-            /**
+            /*
              * The "modifier" portion of the class name added to the last pager in the list of pager controls.
              *
              * @name        modifierLast
@@ -198,7 +198,7 @@
 
             this.modifierLast = 'last';
 
-            /**
+            /*
              * The "modifier" portion of the class name added to the previous pager in the list of pager controls.
              *
              * @name        modifierLast
@@ -210,7 +210,7 @@
 
             this.modifierPrev = 'prev';
 
-            /**
+            /*
              * The "modifier" portion of the class name added to the next pager in the list of pager controls.
              *
              * @name        modifierNext
@@ -222,7 +222,7 @@
 
             this.modifierNext = 'next';
 
-            /**
+            /*
              * The "modifier" portion of the class name added to truncation markers in the list of pager controls.
              *
              * @name        modifierTruncationMarker
@@ -235,7 +235,7 @@
             this.modifierTruncationMarker = 'truncation-marker';
         });
 
-        /**
+        /*
          * A group of properties defining the initial state of the mixer on load (instantiation).
          *
          * @constructor
@@ -247,7 +247,7 @@
          */
 
         mixitup.ConfigLoad.registerAction('afterConstruct', 'pagination', function() {
-            /**
+            /*
              * An integer defining the starting page on load, if a page limit is active.
              *
              * @example <caption>Example: Defining a start page other than 1 to be applied on load</caption>
@@ -273,7 +273,7 @@
             this.page = 1;
         });
 
-        /**
+        /*
          * A group of properties defining the mixer's pagination behavior.
          *
          * @constructor
@@ -286,7 +286,7 @@
 
         mixitup.ConfigPagination = function() {
 
-            /**
+            /*
              * A boolean dictating whether or not MixItUp should render a list of pager controls.
              *
              * If you wish to control pagination functionality via the API, or your own UI, this can be set to `false`.
@@ -315,7 +315,7 @@
 
             this.generatePageList = true;
 
-            /**
+            /*
              * A boolean dictating whether or not MixItUp should render a stats about the
              * current page (e.g. "1 to 4 of 16").
              *
@@ -343,7 +343,7 @@
 
             this.generatePageStats = true;
 
-            /**
+            /*
              * A boolean dictating whether or not to maintain the active page when switching
              * from filter to filter.
              *
@@ -371,7 +371,7 @@
 
             this.maintainActivePage = true;
 
-            /**
+            /*
              * A boolean dictating whether or not to allow "looping" of the built-in previous
              * and next pagination controls.
              *
@@ -398,7 +398,7 @@
 
             this.loop = false;
 
-            /**
+            /*
              * A boolean dictating whether or not to prevent rendering of the built-in
              * "page list" UI if the matching collection of targets has only enough content
              * for one page.
@@ -421,7 +421,7 @@
 
             this.hidePageListIfSinglePage = false;
 
-            /**
+            /*
              * A boolean dictating whether or not to prevent rendering of the built-in
              * "page stats" UI if the matching collection of targets has only enough content
              * for one page.
@@ -444,7 +444,7 @@
 
             this.hidePageStatsIfSinglePage = false;
 
-            /**
+            /*
              * A number defining the maximum number of items per page.
              *
              * By default, this is set to `-1` and pagination is effectively
@@ -469,7 +469,7 @@
 
             this.limit = -1;
 
-            /**
+            /*
              * A number dictating the maximum number of individual pager controls to render before
              * truncating the list (e.g. adding an ellipses between non-consecutive pagers).
              *
@@ -489,7 +489,7 @@
             h.seal(this);
         };
 
-        /**
+        /*
          * A group of optional render functions for creating and updating elements.
          *
          * @constructor
@@ -501,7 +501,7 @@
          */
 
         mixitup.ConfigRender.registerAction('afterConstruct', 'pagination', function() {
-            /**
+            /*
              * A function returning an HTML string representing a single pager control element.
              *
              * By default, MixItUp will render pager controls using its own internal renderer
@@ -521,7 +521,7 @@
 
             this.pager = null;
 
-            /**
+            /*
              * A function returning an HTML string forming the contents of the "page stats" element.
              *
              * By default, MixItUp will render page stats using its own internal renderer
@@ -541,7 +541,7 @@
             this.pageStats = null;
         });
 
-        /**
+        /*
          * A group of properties defining the selectors used to query elements within a mixitup container.
          *
          * @constructor
@@ -553,7 +553,7 @@
          */
 
         mixitup.ConfigSelectors.registerAction('afterConstruct', 'pagination', function() {
-            /**
+            /*
              * A selector string used to query the page list element.
              *
              * Depending on the value of `controls.scope`, MixItUp will either query the
@@ -568,7 +568,7 @@
 
             this.pageList  = '.mixitup-page-list';
 
-            /**
+            /*
              * A selector string used to query the page stats element.
              *
              * Depending on the value of `controls.scope`, MixItUp will either query the
@@ -584,7 +584,7 @@
             this.pageStats = '.mixitup-page-stats';
         });
 
-        /**
+        /*
          * A group of template strings used to render pager controls and page stats elements.
          *
          * @constructor
@@ -596,7 +596,7 @@
          */
 
         mixitup.ConfigTemplates.registerAction('afterConstruct', 'pagination', function() {
-            /**
+            /*
              * @name        pager
              * @memberof    mixitup.Config.templates
              * @instance
@@ -606,7 +606,7 @@
 
             this.pager = '<button type="button" class="${classNames}" data-page="${pageNumber}">${pageNumber}</button>';
 
-            /**
+            /*
              * @name        pagerPrev
              * @memberof    mixitup.Config.templates
              * @instance
@@ -616,7 +616,7 @@
 
             this.pagerPrev = '<button type="button" class="${classNames}" data-page="prev">&laquo;</button>';
 
-            /**
+            /*
              * @name        pagerNext
              * @memberof    mixitup.Config.templates
              * @instance
@@ -626,7 +626,7 @@
 
             this.pagerNext = '<button type="button" class="${classNames}" data-page="next">&raquo;</button>';
 
-            /**
+            /*
              * @name        pagerTruncationMarker
              * @memberof    mixitup.Config.templates
              * @instance
@@ -636,7 +636,7 @@
 
             this.pagerTruncationMarker = '<span class="${classNames}">&hellip;</span>';
 
-            /**
+            /*
              * @name        pageStats
              * @memberof    mixitup.Config.templates
              * @instance
@@ -646,7 +646,7 @@
 
             this.pageStats = '${startPageAt} to ${endPageAt} of ${totalTargets}';
 
-            /**
+            /*
              * @name        pageStatsSingle
              * @memberof    mixitup.Config.templates
              * @instance
@@ -656,7 +656,7 @@
 
             this.pageStatsSingle = '${startPageAt} of ${totalTargets}';
 
-            /**
+            /*
              * @name        pageStatsFail
              * @memberof    mixitup.Config.templates
              * @instance
@@ -667,7 +667,7 @@
             this.pageStatsFail = 'None found';
         });
 
-        /**
+        /*
          * The MixItUp configuration object is extended with the following properties
          * relating to the Pagination extension.
          *
@@ -720,7 +720,7 @@
 
         mixitup.controlDefinitions.push(new mixitup.ControlDefinition('pager', '[data-page]', true, 'pageListEls'));
 
-        /**
+        /*
          * @param   {mixitup.MultimixCommand[]} commands
          * @param   {ClickEvent}                e
          * @return  {object|null}
@@ -784,7 +784,7 @@
             this.paginate = null;
         });
 
-        /**
+        /*
          * @constructor
          * @memberof    mixitup
          * @private
@@ -801,7 +801,7 @@
         };
 
         mixitup.Events.registerAction('afterConstruct', 'pagination', function() {
-            /**
+            /*
              * A custom event triggered whenever a pagination operation starts.
              *
              * @name        paginateStart
@@ -812,7 +812,7 @@
 
             this.paginateStart = null;
 
-            /**
+            /*
              * A custom event triggered whenever a pagination operation ends.
              *
              * @name        paginateEnd
@@ -833,7 +833,7 @@
             this.newTotalPages      = -1;
         });
 
-        /**
+        /*
          * `mixitup.State` objects expose various pieces of data detailing the state of
          * a MixItUp instance. They are provided at the start and end of any operation via
          * callbacks and events, with the most recent state stored between operations
@@ -849,7 +849,7 @@
 
         mixitup.State.registerAction('afterConstruct', 'pagination', function() {
 
-            /**
+            /*
              * The currently active pagination command as set by a control click or API call.
              *
              * @name        activePagination
@@ -861,7 +861,7 @@
 
             this.activePagination = null;
 
-            /**
+            /*
              * The total number of pages produced as a combination of the current page
              * limit and active filter.
              *
@@ -880,7 +880,7 @@
             this.pageStatsEls = [];
         });
 
-        /**
+        /*
          * The mixitup.Mixer class is extended with the following methods relating to
          * the Pagination extension.
          *
@@ -900,7 +900,7 @@
             this.classNamesPageStats    = new mixitup.UiClassNames();
         });
 
-        /**
+        /*
          * @private
          * @return  {void}
          */
@@ -995,7 +995,7 @@
             };
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.Operation} operation
          * @param   {mixitup.State}     state
@@ -1012,7 +1012,7 @@
             return operation;
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.State} state
          * @return  {mixitup.State}
@@ -1031,7 +1031,7 @@
             return state;
         });
 
-        /**
+        /*
          * @private
          * @return  {void}
          */
@@ -1050,7 +1050,7 @@
             }
         });
 
-        /**
+        /*
          * @private
          * @return  {void}
          */
@@ -1080,7 +1080,7 @@
             self.dom.pageStatsEls = parent.querySelectorAll(self.config.selectors.pageStats);
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.State}     state
          * @param   {mixitup.Operation} operation
@@ -1100,7 +1100,7 @@
             return state;
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.UserInstruction}     instruction
          * @return  {mixitup.UserInstruction}
@@ -1118,7 +1118,7 @@
             return instruction;
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.Operation} operation
          * @return  {void}
@@ -1227,7 +1227,7 @@
             }
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.Operation}         operation
          * @param   {mixitup.CommandMultimix}   command
@@ -1265,7 +1265,7 @@
             return operation;
         });
 
-        /**
+        /*
          * @private
          * @param   {mixitup.Operation} operation
          * @param   {object}            command
@@ -1302,9 +1302,9 @@
         });
 
         mixitup.Mixer.extend(
-        /** @lends mixitup.Mixer */
+        /* @lends mixitup.Mixer */
         {
-            /**
+            /*
              * @private
              * @param   {mixitup.CommandPaginate}   command
              * @param   {mixitup.Operation}         operation
@@ -1349,7 +1349,7 @@
                 }
             },
 
-            /**
+            /*
              * @private
              * @return  {number}    page
              */
@@ -1367,7 +1367,7 @@
                 return page;
             },
 
-            /**
+            /*
              * @private
              * @return  {Number}    page
              */
@@ -1385,7 +1385,7 @@
                 return page;
             },
 
-            /**
+            /*
              * @private
              * @param   {HTMLElement}        pageListEl
              * @param   {mixitup.Operation}  operation
@@ -1547,7 +1547,7 @@
                 }
             },
 
-            /**
+            /*
              * An algorithm defining which pagers should be rendered based on their index
              * and the current active page, when a `pagination.maxPagers` value is applied.
              *
@@ -1638,7 +1638,7 @@
                 return indices;
             },
 
-            /**
+            /*
              * Renderes individual, per-page pagers.
              *
              * @private
@@ -1695,7 +1695,7 @@
                 return output;
             },
 
-            /**
+            /*
              * @private
              * @param   {HTMLElement}       pageStatsEl
              * @param   {mixitup.Operation} operation
@@ -1757,7 +1757,7 @@
                 }
             },
 
-            /**
+            /*
              * @private
              * @param   {Array<*>}                  args
              * @return  {mixitup.UserInstruction}   instruction
@@ -1803,7 +1803,7 @@
                 return instruction;
             },
 
-            /**
+            /*
              * Changes the current page and/or the current page limit.
              *
              * @example
@@ -1883,7 +1883,7 @@
                 }, instruction.animate, instruction.callback);
             },
 
-            /**
+            /*
              * A shorthand for `.paginate('next')`. Moves to the next page.
              *
              * @example
@@ -1916,7 +1916,7 @@
                 }, instruction.animate, instruction.callback);
             },
 
-            /**
+            /*
              * A shorthand for `.paginate('prev')`. Moves to the previous page.
              *
              * @example

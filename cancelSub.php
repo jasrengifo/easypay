@@ -1,14 +1,14 @@
 <?php
-/**
+/*
  * Easypay
+ * @author Trigenius
  *
  * @copyright Direitos autorais (c) 2023 Trigenius
  * 
- * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
- * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
  * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  * 
  * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,

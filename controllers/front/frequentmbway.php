@@ -1,14 +1,14 @@
 <?php
-/**
+/*
  * Easypay
+ * @author Trigenius
  *
  * @copyright Direitos autorais (c) 2023 Trigenius
  * 
- * @author Trigenius
  * 
  * Todos os direitos reservados.
  * 
- * É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
+ * @license É concedida permissão para utilizar este software de forma gratuita. No entanto, não é permitido
  * modificar, derivar obras de, distribuir, sublicenciar e/ou vender cópias do software.
  * 
  * O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA,
@@ -151,19 +151,19 @@ class easypayFrequentmbwayModuleFrontController extends ModuleFrontController
     }
 
 
-    /**
+    /*
      * Processa os dados enviados pelo formulário de pagamento
      */
     public function postProcess()
     {
 
-        /**
+        /*
          * Get current cart object from session
          */
         $cart = $this->context->cart;
         $cart_number = $this->context->cart;
         $authorized = false;
-        /**
+        /*
          * Verify if this module is enabled and if the cart has
          * a valid customer, delivery address and invoice address
          */
@@ -174,7 +174,7 @@ class easypayFrequentmbwayModuleFrontController extends ModuleFrontController
             Tools::redirect('index.php?controller=order&step=1');
         }
 
-        /**
+        /*
          * Verify if this payment module is authorized
          */
 
@@ -189,22 +189,22 @@ class easypayFrequentmbwayModuleFrontController extends ModuleFrontController
             die($this->l('This payment method is not available.'));
         }
 
-        /** @var CustomerCore $customer */
+        /* @var CustomerCore $customer */
         $customer = new Customer($cart->id_customer);
 
-        /**
+        /*
          * Check if this is a valid customer account
          */
         if (!Validate::isLoadedObject($customer)) {
             Tools::redirect('index.php?controller=order&step=1');
         }
 
-        /**
+        /*
          *Validar pago com mutlibanco
          */
 
 
-        /**
+        /*
          * Place the order
          */
         $order = $this->module->validateOrder(
@@ -221,25 +221,6 @@ class easypayFrequentmbwayModuleFrontController extends ModuleFrontController
 
 
 
-        // Mail::Send(
-        //     (int)(Configuration::get('PS_LANG_DEFAULT')), // defaut language id
-        //     'visa', // email template file to be use
-        //     'Pagamento com Mbway - EASYPAY', // email subject
-        //     array(
-        //         '{URL}' => $multibanco['method']['url'],
-        //         '{SHOPNAME}' => Configuration::get('PS_SHOP_NAME'),
-        //     ),
-        //     $this->context->customer->email, // receiver email address 
-        //     NULL, //receiver name
-        //     NULL, //from email address
-        //     NULL,  //from name
-        //     NULL,
-        //     NULL,
-        //     _PS_BASE_URL_.__PS_BASE_URI__.'modules/easypay/mails/'
-        // );
-        /**
-         * Redirect the customer to the order confirmation page
-         */
 
         if ($order == 1) {
             $esql = "SELECT * FROM " . _DB_PREFIX_ . "orders WHERE id_cart=" . $cart->id;
